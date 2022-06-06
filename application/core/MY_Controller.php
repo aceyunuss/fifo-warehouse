@@ -13,11 +13,11 @@ class Core_Controller extends CI_Controller
 
     $dota['content'] = $view;
     $dota['title'] = $title;
-    $dota['site_title'] = "Project Monitoring - " . $title;
+    $dota['site_title'] = "Warehouse Management - " . $title;
 
     $pass = array_merge($dota, $data);
 
-    $this->load->view('v_template', $pass);
+    $this->load->view('template_vw', $pass);
   }
 
   public function upld($input)

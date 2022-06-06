@@ -18,7 +18,9 @@ class Auth extends Core_Controller
     } else {
       $this->session->sess_destroy();
       $data['title'] = "Project Monitoring";
-      $this->load->view("v_login");
+      $this->load->view("login");
+      // $this->template('dashboard_vw', "Dashboard");
+
     }
   }
 
