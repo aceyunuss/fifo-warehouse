@@ -16,6 +16,8 @@
   <link href="<?= base_url('assets/css/nucleo-svg.css') ?>" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  
+  <script src="<?= base_url('assets/js/jquery.min.js') ?> "></script>
   <link href="<?= base_url('assets/css/nucleo-svg.css') ?>" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="<?= base_url('assets/css/soft-ui-dashboard.css?v=1.0.6') ?>" rel="stylesheet" />
@@ -36,6 +38,7 @@
   <script src="<?= base_url('assets/js/plugins/smooth-scrollbar.min.js') ?>"></script>
   <script src="<?= base_url('assets/js/plugins/chartjs.min.js') ?>"></script>
   <script>
+    
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {

@@ -24,7 +24,7 @@ class User_mod extends CI_Model
   public function get($id = "")
   {
     if (!empty($id)) {
-      $this->db->where("user_id", $id);
+      $this->db->where("id", $id);
     }
     return $this->db->get("user");
   }
@@ -32,13 +32,13 @@ class User_mod extends CI_Model
 
   public function delete($id)
   {
-    $this->db->where("user_id", $id)->delete("user");
+    $this->db->where("id", $id)->delete("user");
     return $this->db->affected_rows();
   }
 
   public function update($id, $data)
   {
-    $this->db->where("user_id", $id)->update("user", $data);
+    $this->db->where("id", $id)->update("user", $data);
     return $this->db->affected_rows();
   }
 

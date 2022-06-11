@@ -6,7 +6,7 @@ class User extends Core_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model(['M_user']);
+    $this->load->model(['User_mod']);
 
     if ($this->session->userdata('status') != 'granted') {
       $this->session->sess_destroy();
@@ -17,50 +17,50 @@ class User extends Core_Controller
 
   public function index()
   {
-    $data['userlist'] = $this->M_user->get()->result_array();
-    $this->template("user/v_list", "Data User", $data);
+    $data['userlist'] = $this->User_mod->get()->result_array();
+    $this->template("user/userlist_vw", "User Access", $data);
   }
 
 
-  public function add()
+  public function newuser()
   {
-    $data['role'] = ['Murid', 'Pembimbing', 'Manajer Proyek', 'Kepala Madrasah'];
-    $this->template("user/v_add", "Tambah Data User", $data);
+    $data['pos'] = ['Admin Gudang', 'PPIC', 'Purchase', 'Kabag Produksi'];
+    $this->template("user/newuser_vw", "Tambah User Baru", $data);
   }
 
 
-  public function go_add()
+  public function new_inp()
   {
     $post = $this->input->post();
 
-    $dt = [
-      'fullname'      => $post['name'],
-      'role'          => $post['role'],
-      'gender'        => $post['gender'],
+    $getuser = [
+      'complete_name' => $post['name'],
+      'position'      => $post['pos'],
+      'birth'         => $post['birthplace'],
       'phone'         => $post['phone'],
-      'email'         => $post['email'],
+      'username'      => $post['username'],
       'birthdate'     => $post['birthdate'],
       'password'      => md5($post['password']),
     ];
 
     $this->db->trans_begin();
 
-    $this->M_user->insert($dt);
+    $this->User_mod->insert($getuser);
 
     if ($this->db->trans_status() !== FALSE) {
       $this->db->trans_commit();
-      echo "<script>alert('Berhasil menambah user'); location.href='" . site_url('user') . "';</script>";
+      echo "<script>alert('Berhasil menambah user baru'); location.href='" . site_url('user') . "';</script>";
     } else {
       $this->db->trans_rollback();
-      echo "<script>alert('Berhasil menambah user'); location.href='" . site_url('user/add') . "';</script>";
+      echo "<script>alert('Gagal menambah user baru'); location.href='" . site_url('user/newuser') . "';</script>";
     }
   }
 
 
-  public function delete($id)
+  public function deleteuser($id)
   {
 
-    $this->M_user->delete($id);
+    $this->User_mod->delete($id);
 
     if ($this->db->trans_status() !== FALSE) {
       $this->db->trans_commit();
@@ -74,73 +74,43 @@ class User extends Core_Controller
   }
 
 
-  public function edit($id)
+  public function edituser($id)
   {
-    $data['usr'] = $this->M_user->get($id)->row_array();
-    $data['role'] = ['Murid', 'Pembimbing', 'Manajer Proyek', 'Kepala Madrasah'];
-    $this->template("user/v_edit", "Ubah Data User", $data);
+    $data['user'] = $this->User_mod->get($id)->row_array();
+    $data['pos'] = ['Admin Gudang', 'PPIC', 'Purchase', 'Kabag Produksi'];
+    $this->template("user/edituser_vw", "Ubah User", $data);
   }
 
 
-  public function go_edit()
+  public function edit_inp()
   {
     $post = $this->input->post();
 
-    $dt = [
-      'fullname'      => $post['name'],
-      'role'          => $post['role'],
-      'gender'        => $post['gender'],
+    $getuser = [
+      'complete_name' => $post['name'],
+      'position'      => $post['pos'],
+      'birth'         => $post['birthplace'],
       'phone'         => $post['phone'],
-      'email'         => $post['email'],
+      'username'      => $post['username'],
       'birthdate'     => $post['birthdate'],
     ];
 
     if (!empty($post['password'])) {
-      $dt['password'] = md5($post['password']);
+      $getuser['password'] = md5($post['password']);
     }
 
     $this->db->trans_begin();
 
-    $this->M_user->update($post['user_id'], $dt);
+    $this->User_mod->update($post['id'], $getuser);
 
     if ($this->db->trans_status() !== FALSE) {
       $this->db->trans_commit();
-      if ($this->session->userdata('role') != 'Pembimbing') {
-        $site = site_url('user');
-      } else {
-        $site = site_url();
-      }
-      echo "<script>alert('Berhasil mengubah user'); location.href='" . $site . "';</script>";
+      echo "<script>alert('Berhasil mengubah data user'); location.href='" . site_url('user') . "';</script>";
     } else {
       $this->db->trans_rollback();
-      echo "<script>alert('Gagal mengubah user'); location.href='" . site_url('user/edit/' . $post['user_id']) . "';</script>";
+      echo "<script>alert('Gagal mengubah date user'); location.href='" . site_url('user/edituser/' . $post['id']) . "';</script>";
     }
   }
 
 
-  public function pass($id)
-  {
-    $data['usr'] = $this->M_user->get($id)->row_array();
-    $this->template("user/v_pass", "Ubah Password", $data);
-  }
-
-
-  public function go_pass()
-  {
-    $post = $this->input->post();
-
-    $dt['password'] = md5($post['password']);
-
-    $this->db->trans_begin();
-
-    $this->M_user->update($post['user_id'], $dt);
-
-    if ($this->db->trans_status() !== FALSE) {
-      $this->db->trans_commit();
-      echo "<script>alert('Berhasil mengubah password'); location.href='" . site_url() . "';</script>";
-    } else {
-      $this->db->trans_rollback();
-      echo "<script>alert('Gagal mengubah password'); location.href='" . site_url('user/pass/' . $post['user_id']) . "';</script>";
-    }
-  }
 }
