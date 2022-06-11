@@ -17,9 +17,6 @@ class User extends Core_Controller
 
   public function index()
   {
-    if ($this->session->userdata('role') != 'Pembimbing') {
-      $this->db->where('user_id', $this->session->userdata('user_id'));
-    }
     $data['userlist'] = $this->M_user->get()->result_array();
     $this->template("user/v_list", "Data User", $data);
   }

@@ -2,7 +2,7 @@
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-      <img src="<?= base_url('assets/img/logo-ct-dark.png') ?>" class="navbar-brand-img h-100" alt="main_logo">
+      <img src="<?= site_url('assets/img/logo-ct-dark.png') ?>" class="navbar-brand-img h-100" alt="main_logo">
       <span class="ms-1 font-weight-bold">PT Multi Optima Sejahtera</span>
     </a>
   </div>
@@ -10,7 +10,7 @@
   <div class="" id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link  active" href="<?= base_url('pages/dashboard.html') ?>">
+        <a class="nav-link  active" href="<?= site_url('pages/dashboard.html') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>shop </title>
@@ -30,7 +30,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link  " href="<?= base_url('pages/profile.html') ?>">
+        <a class="nav-link  " href="<?= site_url('user') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>customer-support</title>
@@ -51,7 +51,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link  " href="<?= base_url('pages/virtual-reality.html') ?>">
+        <a class="nav-link  " href="<?= site_url('pages/virtual-reality.html') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>box-3d-50</title>
@@ -73,7 +73,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link  " href="<?= base_url('pages/tables.html') ?>">
+        <a class="nav-link  " href="<?= site_url('pages/tables.html') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>office</title>
@@ -93,7 +93,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link  " href="<?= base_url('pages/sign-up.html') ?>">
+        <a class="nav-link  " href="<?= site_url('pages/sign-up.html') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>spaceship</title>
@@ -111,11 +111,11 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Pengeluaran Barang</span>
+          <span class="nav-link-text ms-1">Permintaan Barang</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link  " href="<?= base_url('pages/sign-in.html') ?>">
+        <a class="nav-link  " href="<?= site_url('pages/sign-in.html') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>document</title>
