@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url('assets/img/apple-icon.png') ?>">
   <link rel="icon" type="image/png" href="<?= base_url('assets/img/favicon.png') ?>">
+  <link href="<?= base_url('assets/css/select2.min.css') ?>" rel="stylesheet">
   <title>
     <?= $site_title ?>
   </title>
@@ -16,8 +17,9 @@
   <link href="<?= base_url('assets/css/nucleo-svg.css') ?>" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  
+
   <script src="<?= base_url('assets/js/jquery.min.js') ?> "></script>
+  <script src="<?= base_url('assets/js/select2.min.js') ?> "></script>
   <link href="<?= base_url('assets/css/nucleo-svg.css') ?>" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="<?= base_url('assets/css/soft-ui-dashboard.css?v=1.0.6') ?>" rel="stylesheet" />
@@ -38,7 +40,6 @@
   <script src="<?= base_url('assets/js/plugins/smooth-scrollbar.min.js') ?>"></script>
   <script src="<?= base_url('assets/js/plugins/chartjs.min.js') ?>"></script>
   <script>
-    
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
@@ -216,6 +217,50 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+
+
+    $(document).ready(function() {
+
+      $(".select2").select2();
+      // $(".sees").select2({
+      //   theme: "classic"
+      // });
+
+
+      na = '<div class="card-body pt-4 p-3">\
+            <ul class="list-group">\
+              <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">\
+                <div class="d-flex flex-column">\
+                  <div id="nav"></div>\
+                </div>\
+              </li>\
+            </ul>\
+          </div>';
+
+      $('#datatebel').after(na);
+      var rowsShown = 5;
+      var rowsTotal = $('#datatebel tbody tr').length;
+      var numPages = rowsTotal / rowsShown;
+      for (i = 0; i < numPages; i++) {
+        var pageNum = i + 1;
+        $('#nav').append('<a  class="btn bg-gradient-primary" href="#" rel="' + i + '">' + pageNum + '</a> ');
+      }
+      $('#datatebel tbody tr').hide();
+      $('#datatebel tbody tr').slice(0, rowsShown).show();
+      $('#nav a:first').addClass('active');
+      $('#nav a').bind('click', function() {
+
+        $('#nav a').removeClass('active');
+        $(this).addClass('active');
+        var currPage = $(this).attr('rel');
+        var startItem = currPage * rowsShown;
+        var endItem = startItem + rowsShown;
+        $('#datatebel tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+        css('display', 'table-row').animate({
+          opacity: 1
+        }, 300);
+      });
+    });
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

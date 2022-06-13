@@ -16,6 +16,9 @@
         <ul class="navbar-nav  justify-content-end">
 
           <li class="nav-item d-flex align-items-center">
+            <span class="d-sm-inline d-none"><?= $this->session->userdata('name') ?></span> &nbsp;&nbsp;&nbsp;
+          </li>
+          <li class="nav-item d-flex align-items-center">
             <a href="<?= site_url('auth/logout') ?>" class="nav-link text-body font-weight-bold px-0">
               <i class="fa fa-user me-sm-1"></i>
               <span class="d-sm-inline d-none">Sign Out</span>

@@ -7,7 +7,7 @@
             <h6 class="mb-0"><?= $title ?></h6>
           </div>
           <div class="col-6 text-end">
-            <a class="btn bg-gradient-dark mb-0" href="<?= site_url('user/newuser') ?>"><i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Tambah User Baru</a>
+            <a class="btn bg-gradient-dark mb-0" href="<?= site_url('inbound/create') ?>"><i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Pembuatan BPB</a>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($userlist as $key => $value) { ?>
+              <?php foreach ($logs as $key => $value) { ?>
                 <tr class="text-center">
                   <td>
                     <p class="text-sm mb-0"><?= ++$key ?></p>
