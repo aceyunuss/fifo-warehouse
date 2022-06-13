@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="card-body">
-        <form role="form text-left" action="<?= site_url('user/new_inp') ?>" method="POST">
+        <form role="form text-left" action="<?= site_url('inbound/new_inp') ?>" method="POST" id="submitform">
 
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">
@@ -19,7 +19,7 @@
               <select class="form-control select2" required name="supp">
                 <option value="">-- Pilih --</option>
                 <?php foreach ($supp as $key => $value) { ?>
-                  <option value="<?= $value ?>"><?= $value ?></option>
+                  <option value="<?= $value['id'] ?>"><?= $value['code'] . ' - ' . $value['supp_name'] ?></option>
                 <?php } ?>
               </select>
             </div>
@@ -29,13 +29,13 @@
               <h6 class="mb-1 text-dark text-sm">BPB No</h6>
             </label>
             <div class="col-sm-3">
-              <input type="text" maxlength="255" class="form-control" name="bpbno" required>
+              <input type="text" maxlength="255" class="form-control" name="bpb" readonly value="<?= $bpb ?>">
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">
-              <h6 class="mb-1 text-dark text-sm">Delivery Order/Date</h6>
+              <h6 class="mb-1 text-dark text-sm">Delivery Order Date</h6>
             </label>
             <div class="col-sm-4">
               <input type="date" class="form-control" name="dodate" required>
@@ -57,36 +57,87 @@
             <div class="col-sm-3">
               <input type="text" maxlength="255" class="form-control" name="po" required>
             </div>
+            <div class="col-sm-2">
+            </div>
+            <label class="col-sm-1 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">Note</h6>
+            </label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" name="note" required>
+            </div>
           </div>
           <br>
           <hr class="horizontal dark mt-0">
           <br>
 
 
+
           <div class="form-group row">
-            <!-- <label class="col-sm-2 col-form-label">
-              <h6 class="mb-1 text-dark text-sm">Supplier</h6>
-            </label> -->
-            <div class="col-sm-5">
-              <select class="form-control select2" required id="item">
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">Item</h6>
+            </label>
+            <div class="col-sm-8">
+              <select class="form-control select2" id="itm">
                 <option value="">-- Pilih Barang --</option>
                 <?php foreach ($item as $key => $value) { ?>
+                  <option value="<?= $value['id'] ?>"><?= $value['description'] . ' | ' . $value['name'] ?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">Category</h6>
+            </label>
+            <div class="col-sm-3">
+              <select class="form-control" id="cat">
+                <option value="">-- Pilih --</option>
+                <?php foreach ($cat as $key => $value) { ?>
                   <option value="<?= $value ?>"><?= $value ?></option>
                 <?php } ?>
               </select>
             </div>
+            <div class="col-sm-1"></div>
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">Panjang</h6>
+            </label>
+            <div class="col-sm-2">
+              <input type="number" maxlength="255" class="form-control" id="le">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">Qty</h6>
+            </label>
+            <div class="col-sm-2">
+              <input type="number" maxlength="255" class="form-control" id="qty">
+            </div>
+            <div class="col-sm-2"></div>
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">Lebar</h6>
+            </label>
+            <div class="col-sm-2">
+              <input type="number" maxlength="255" class="form-control" id="wi">
+            </div>
+          </div>
+
+          <center>
             <div class="col-sm-3">
               <a class="btn btn-outline-primary btn-sm mb-0 add">Tambah Barang</a>
             </div>
-          </div>
+          </center>
+
           <br>
           <hr class="horizontal dark mt-0">
           <br>
 
           <div class="table-responsive p-0">
-            <table class="table align-items-center mb-0">
+            <table class="table align-items-center mb-0 item_table">
               <thead>
                 <tr>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">#</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Category</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
@@ -100,39 +151,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="text-center">
-                  <td>
-                    <p class="text-sm mb-0">RML RMP DT</p>
-                  </td>
-                  <td>
-                    <p class="text-sm mb-0">Chromo Backing Putih </p>
-                  </td>
-                  <td>
-                    <p class="text-sm mb-0">LP.CC/GL P-A "CAMEL" </p>
-                  </td>
-                  <td>
-                    <p class="text-sm mb-0">3</p>
-                  </td>
-                  <td>
-                    <p class="text-sm mb-0"> 20 </p>
-                  </td>
-                  <td>
-                    <center>
-                      <input type="number" class="form-control form-control-sm" style="width:100px">
-                    </center>
-                  </td>
-                  <td>
-                    <p class="text-sm mb-0">Roll</p>
-                  </td>
-                </tr>
+
               </tbody>
             </table>
           </div>
 
-
+          <br>
+          <br>
           <div class="text-center">
-            <br>
-            <button type="submit" id="submitform" class="btn bg-gradient-dark">Submit</button>
+            <button type="submit" class="btn bg-gradient-dark">Submit</button>
           </div>
         </form>
       </div>
@@ -144,28 +171,64 @@
 <script>
   $(document).ready(function() {
 
+
     $('.add').click(function() {
       let counter = $('.item_table tr').length + 1;
-      let item_id = $('#det_name').val()
+      let item_id = $('#itm').val()
+      let item = $('#itm option:selected').text()
+      let desc = item.split('|')[0]
+      let name = item.split('|')[1]
+      let cat = $('#cat').val()
+      let qty = $('#qty').val()
+      let le = $('#le').val()
+      let wi = $('#wi').val()
 
+      if (item_id == "" || cat == "" || qty == "" || le == "" || wi == "") {
 
-      if (name == "" || weight == "" || type == "") {
-
-        alert("Max value is 100")
+        alert("Form item harus dilelngkapi")
 
       } else {
 
-        tbody = '<tr>\
-                    <td><center><i class="remove fa fa-trash-o"></i></center></td>\
-                    <td>' + name + '</td>\
-                    <input type="hidden" value="' + name + '" name="cr_name[]">\
-                    <td>' + type + '</td>\
-                    <input type="hidden" value="' + type + '" name="cr_type[]">\
-                    <td><center>' + weight + '</center></td>\
-                    <input class="wg" type="hidden" value="' + weight + '" name="cr_weight[]">\
-                  </tr>';
+        tbody = '<tr class="text-center">\
+                  <td>\
+                    <i class="fa fa-trash text-danger remove"></i>\
+                    <input type="hidden" value="' + item_id + '" name="item_id[]">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cat + '</p>\
+                    <input type="hidden" value="' + cat + '" name="cat[]">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + desc + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + name + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + qty + '</p>\
+                    <input type="hidden" value="' + qty + '" name="qty[]">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + le + '</p>\
+                    <input type="hidden" value="' + le + '" name="length[]">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + wi + '</p>\
+                    <input type="hidden" value="' + wi + '" name="width[]">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">Roll</p>\
+                  </td>\
+                </tr>'
 
         $('.item_table tbody').append(tbody)
+
+        $('#itm').val('')
+        $('#cat').val('')
+        $('#qty').val('')
+        $('#le').val('')
+        $('#wi').val('')
+        $('#itm').trigger('change')
 
       }
     })
@@ -181,21 +244,11 @@
 
   $("#submitform").submit(function(e) {
 
-    if ($('.item_table tr').length == 1) {
-      alert("Item can't be empty")
+    if ($('.item_table tr').length == 2) {
+      alert("List barang tidak boleh kosong")
       e.preventDefault();
     }
 
-    percent = 0;
-    $('.wg').each(function(i, obj) {
-      wg = parseInt($(this).val())
-      percent += wg;
-    });
-
-    if (percent != 100) {
-      alert("Total criteria weight must be 100");
-      e.preventDefault();
-    }
 
   })
 </script>

@@ -7,7 +7,7 @@
             <h6 class="mb-0"><?= $title ?></h6>
           </div>
           <div class="col-6 text-end">
-            <a class="btn bg-gradient-dark mb-0" href="<?= site_url('inbound/create') ?>"><i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Pembuatan BPB</a>
+            <a class="btn bg-gradient-dark mb-0" href="<?= site_url('inbound/create') ?>"><i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Buat BPB</a>
           </div>
         </div>
       </div>
@@ -16,10 +16,11 @@
           <table id="datatebel" class="table align-items-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">No</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Posisi</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">BPB No</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Supplier</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">BPB Date</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Delivery Order Date</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">PO No</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
             </thead>
