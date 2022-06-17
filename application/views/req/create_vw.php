@@ -9,126 +9,87 @@
         </div>
       </div>
       <div class="card-body">
-        <form role="form text-left" action="<?= site_url('inbound/new_inp') ?>" method="POST" id="submitform">
+        <form role="form text-left" action="<?= site_url('req/new_inp') ?>" method="POST" id="submitform">
 
           <div class="form-group row">
-            <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Supplier</h6>
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">SPB No</h6>
             </label>
-            <div class="col-sm-4">
-              <select class="form-control select2" required name="supp">
-                <option value="">-- Pilih --</option>
-                <?php foreach ($supp as $key => $value) { ?>
-                  <option value="<?= $value['id'] ?>"><?= $value['code'] . ' - ' . $value['supp_name'] ?></option>
-                <?php } ?>
-              </select>
+            <div class="col-sm-3">
+              <input type="text" maxlength="255" class="form-control" name="spb" readonly value="<?= $spb ?>">
             </div>
             <div class="col-sm-1">
             </div>
-            <label class="col-sm-1 control-label">
-              <h6 class="mb-1 text-dark text-sm">BPB No</h6>
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">Divisi</h6>
             </label>
             <div class="col-sm-3">
-              <input type="text" maxlength="255" class="form-control" name="bpb" readonly value="<?= $bpb ?>">
+              <input type="text" maxlength="255" class="form-control" name="div" readonly value="Produksi">
             </div>
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Delivery Order Date</h6>
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">SPB Date</h6>
             </label>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" name="dodate" required>
+            <div class="col-sm-3">
+              <input type="date" class="form-control" name="spbdate" required>
             </div>
             <div class="col-sm-1">
             </div>
-            <label class="col-sm-1 control-label">
-              <h6 class="mb-1 text-dark text-sm">BPB Date</h6>
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">SPK No</h6>
             </label>
             <div class="col-sm-3">
-              <input type="date" class="form-control" name="bpbdate" required>
+              <input type="text" maxlength="255" class="form-control" name="spk" required>
             </div>
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">PO No</h6>
+            <div class="col-sm-6">
+            </div>
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">Item Category</h6>
             </label>
             <div class="col-sm-3">
-              <input type="text" maxlength="255" class="form-control" name="po" required>
-            </div>
-            <div class="col-sm-2">
-            </div>
-            <label class="col-sm-1 control-label">
-              <h6 class="mb-1 text-dark text-sm">Note</h6>
-            </label>
-            <div class="col-sm-3">
-              <input type="text" class="form-control" name="note" required>
-            </div>
-          </div>
-          <br>
-          <hr class="horizontal dark mt-0">
-          <br>
-
-
-
-          <div class="form-group row">
-            <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Item</h6>
-            </label>
-            <div class="col-sm-8">
-              <select class="form-control select2" id="itm">
-                <option value="">-- Pilih Barang --</option>
-                <?php foreach ($item as $key => $value) { ?>
-                  <option value="<?= $value['id'] ?>"><?= $value['description'] . ' | ' . $value['name'] ?></option>
-                <?php } ?>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Category</h6>
-            </label>
-            <div class="col-sm-3">
-              <select class="form-control" id="cat">
+              <select class="form-control" id="cat" name="cat">
                 <option value="">-- Pilih --</option>
                 <?php foreach ($cat as $key => $value) { ?>
                   <option value="<?= $value ?>"><?= $value ?></option>
                 <?php } ?>
               </select>
             </div>
-            <div class="col-sm-1"></div>
-            <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Panjang</h6>
+          </div>
+          <br>
+          <hr class="horizontal dark mt-0">
+          <br>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">
+              <h6 class="mb-1 text-dark text-sm">Item</h6>
             </label>
-            <div class="col-sm-2">
-              <input type="number" maxlength="255" class="form-control" id="le">
+            <div class="col-sm-8">
+              <select class="form-control select2" id="itm">
+              </select>
             </div>
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-2 control-label">
+            <label class="col-sm-2 col-form-label">
               <h6 class="mb-1 text-dark text-sm">Qty</h6>
             </label>
             <div class="col-sm-2">
               <input type="number" maxlength="255" class="form-control" id="qty">
             </div>
-            <div class="col-sm-2"></div>
-            <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Lebar</h6>
-            </label>
-            <div class="col-sm-2">
-              <input type="number" maxlength="255" class="form-control" id="wi">
-            </div>
           </div>
+
+
 
           <center>
             <div class="col-sm-3">
               <a class="btn btn-outline-primary btn-sm mb-0 add">Tambah Barang</a>
             </div>
           </center>
-
           <br>
           <hr class="horizontal dark mt-0">
           <br>
@@ -151,14 +112,13 @@
                 </tr>
               </thead>
               <tbody>
-
               </tbody>
             </table>
           </div>
 
-          <br>
-          <br>
+
           <div class="text-center">
+            <br>
             <button type="submit" class="btn bg-gradient-dark">Submit</button>
           </div>
         </form>
@@ -170,20 +130,40 @@
 
 <script>
   $(document).ready(function() {
+    $('#cat').change(function() {
+      let cat = $(this).val()
+      $.ajax({
+        type: "POST",
+        url: '<?= site_url('req/get_stock') ?>',
+        data: {
+          cat: cat,
+        },
+        success: function(data, textStatus, jQxhr) {
+          cale = JSON.parse(data)
 
+          $('#itm').html('')
+          let sel = ('<option>-- Pilih Barang --</option>');
+          for (let x in cale) {
+            sel += "<option value = '" + cale[x].stock_id + "'>" + cale[x].dsc + " | " + cale[x].nm + " | " + cale[x].lg + " x " + cale[x].wd + "</option>";
+          }
+          $('#itm').html(sel)
+        },
+      });
+    })
 
     $('.add').click(function() {
       let counter = $('.item_table tr').length + 1;
-      let item_id = $('#itm').val()
+      let stock_id = $('#itm').val()
       let item = $('#itm option:selected').text()
       let desc = item.split('|')[0]
       let name = item.split('|')[1]
       let cat = $('#cat').val()
       let qty = $('#qty').val()
-      let le = $('#le').val()
-      let wi = $('#wi').val()
+      let size = item.split('|')[2]
+      let le = size.split('x')[0]
+      let wi = size.split('x')[1]
 
-      if (item_id == "" || cat == "" || qty == "" || le == "" || wi == "") {
+      if (stock_id == "" || cat == "" || qty == "" || le == "" || wi == "") {
 
         alert("Form item harus dilelngkapi")
 
@@ -192,7 +172,7 @@
         tbody = '<tr class="text-center">\
                   <td>\
                     <i class="fa fa-trash text-danger remove"></i>\
-                    <input type="hidden" value="' + item_id + '" name="item_id[]">\
+                    <input type="hidden" value="' + stock_id + '" name="stock_id[]">\
                   </td>\
                   <td>\
                     <p class="text-sm mb-0">' + cat + '</p>\
@@ -224,10 +204,7 @@
         $('.item_table tbody').append(tbody)
 
         $('#itm').val('')
-        $('#cat').val('')
         $('#qty').val('')
-        $('#le').val('')
-        $('#wi').val('')
         $('#itm').trigger('change')
 
       }
@@ -243,10 +220,9 @@
 
 
   $("#submitform").submit(function(e) {
-
+    
     if ($('.item_table tr').length == 2) {
       alert("List barang tidak boleh kosong")
-      e.preventDefault();
     }
 
 

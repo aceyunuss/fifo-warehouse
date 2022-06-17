@@ -60,4 +60,12 @@ class Mst_mod extends CI_Model
     $this->db->where('status_id', $st);
     return $this->db->get('todo_v');
   }
+
+  public function getStock($id = "")
+  {
+    if (!empty($id)) {
+      $this->db->where('stock_id', $id);
+    }
+    return $this->db->get("item_stock");
+  }
 }

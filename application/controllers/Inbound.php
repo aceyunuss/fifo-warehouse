@@ -43,7 +43,9 @@ class Inbound extends Core_Controller
       'po'      => $dat['po'],
       'bpb'     => $dat['bpb'],
       'bpb_date' => $dat['bpbdate'],
-      'note'    => $dat['note']
+      'note'    => $dat['note'],
+      'status_id'=> 1,
+      'status'  => "Menunggu Persetujuan"
     ];
 
     $in = $this->Inbound_mod->insert($inp);
