@@ -80,4 +80,44 @@ class Inbound extends Core_Controller
     $de['itm'] = $this->Inbound_mod->getItem("", $id)->result_array();
     $this->template("inbound/inboundvw_vw", "Bukti Penerimaan Barang", $de);
   }
+
+
+  public function process($id)
+  {
+    $de['inb'] = $this->Inbound_mod->get($id)->row_array();
+    $de['itm'] = $this->Inbound_mod->getItem("", $id)->result_array();
+    $this->template("inbound/inboundprc_vw", "Bukti Penerimaan Barang", $de);
+  }
+
+
+
+  public function prc_inp()
+  {
+    $this->db->trans_begin();
+
+    $p = $this->session->userdata('position');
+    $id = $this->input->post('id');
+
+    if ($p == "Purchase") {
+      $data['status_id'] = 2;
+    }
+    if ($p == "PPIC") {
+      $data['status_id'] = 3;
+      $data['status'] = "Selesai";
+
+      $this->Inbound_mod->insertLot($id);
+    }
+    if (isset($data)) {
+      $this->Inbound_mod->update($id, $data);
+    }
+
+    if ($this->db->trans_status() !== FALSE) {
+      $this->db->trans_commit();
+      $msg = "Berhasi";
+    } else {
+      $this->db->trans_rollback();
+      $msg = "Gagal";
+    }
+    echo "<script>alert('$msg memproses data'); location.href='" . site_url('inbound') . "';</script>";
+  }
 }

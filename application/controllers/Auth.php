@@ -14,7 +14,8 @@ class Auth extends Core_Controller
   public function index()
   {
     if ($this->session->userdata('status') == 'granted') {
-      $this->template('dashboard_vw', "Dashboard");
+      $data['todo'] = $this->Mst_mod->getTodo()->result_array();
+      $this->template('dashboard_vw', "Dashboard", $data);
     } else {
       $this->session->sess_destroy();
       $data['title'] = "Project Monitoring";

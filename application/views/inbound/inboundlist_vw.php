@@ -21,6 +21,7 @@
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">BPB Date</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Delivery Order Date</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">PO No</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
             </thead>
@@ -41,6 +42,9 @@
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['po'] ?></p>
+                  </td>
+                  <td>
+                    <p class="text-sm mb-0"><?= $value['status'] ?></p>
                   </td>
                   <td>
                     <a href="<?= site_url('inbound/view/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Lihat</a>

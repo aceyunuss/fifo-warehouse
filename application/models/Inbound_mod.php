@@ -60,4 +60,77 @@ class Inbound_mod extends CI_Model
     }
     return $this->db->get("inbound_item");
   }
+
+
+  private  function avail($id, $length, $width)
+  {
+    return $this->db
+      ->select("stock_id")
+      ->where(['item_id' => $id, 'lg' => $length, 'wd' => $width])
+      ->get("item_stock")->row_array();
+  }
+
+
+  private function loted($stock_id, $lot)
+  {
+    return $this->db
+      ->select("lot_id, qty")
+      ->where(['stock_id' => $stock_id, 'lot' => $lot])
+      ->get("item_lot")
+      ->row_array();
+  }
+
+  public function insertLot($id)
+  {
+    $itm = $this->getItem("", $id)->result_array();
+
+    foreach ($itm as $key => $value) {
+      $av = $this->avail($value['item_id'], $value['length'], $value['width']);
+
+      if (is_null($av)) {
+        $st = [
+          'item_id' => $value['item_id'],
+          'nm'      => $value['name'],
+          'dsc'     => $value['description'],
+          'lg'      => $value['length'],
+          'wd'      => $value['width'],
+          'cat'     => $value['category']
+        ];
+
+        $this->db->insert("item_stock", $st);
+        $sid = $this->db->insert_id();
+      } else {
+        $sid = $av['stock_id'];
+      }
+
+      switch ($value['category']) {
+        case 'RML':
+          $f = "A";
+          break;
+        case 'RMP':
+          $f = "B";
+          break;
+        case 'DT':
+          $f = "C";
+          break;
+      }
+
+      $lid =  $f . date('Ymd');
+
+      $loted = $this->loted($sid, $lid);
+
+      if (is_null($loted)) {
+
+        $lot = [
+          'stock_id'  => $sid,
+          'lot'       => $lid,
+          'qty'       => $value['qty']
+        ];
+        $this->db->insert("item_lot", $lot);
+      } else {
+        $upd['qty'] = $loted['qty'] + $value['qty'];
+        $this->db->where('lot_id', $loted['lot_id'])->update("item_lot", $upd);
+      }
+    }
+  }
 }
