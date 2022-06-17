@@ -28,20 +28,22 @@
               <?php foreach ($logs as $key => $value) { ?>
                 <tr class="text-center">
                   <td>
-                    <p class="text-sm mb-0"><?= ++$key ?></p>
+                    <p class="text-sm mb-0"><?= $value['bpb'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['complete_name'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['supp_id'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['position'] ?></p>
+                    <p class="text-sm mb-0"><?= substr($value['bpb_date'], 0, 10) ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['username'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['do_date'] ?></p>
                   </td>
                   <td>
-                    <a href="<?= site_url('user/edituser/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Ubah</a>
-                    <a onclick="return confirm('Apakah ingin menghapus user ini?');" href="<?= site_url('user/deleteuser/' . $value['id']) ?>" class="badge badge-sm bg-gradient-warning">Hapus</a>
+                    <p class="text-sm mb-0"><?= $value['po'] ?></p>
+                  </td>
+                  <td>
+                    <a href="<?= site_url('inbound/view/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Lihat</a>
                   </td>
                 </tr>
               <?php } ?>

@@ -17,9 +17,11 @@ class Inbound_mod extends CI_Model
 
   public function get($id = "")
   {
+    $this->db->select("inbound.*, supp_name");
     if (!empty($id)) {
-      $this->db->where("id", $id);
+      $this->db->where("inbound.id", $id);
     }
+    $this->db->join("supplier", "supplier.id=inbound.supp_id", "left");
     return $this->db->get("inbound");
   }
 
@@ -45,5 +47,17 @@ class Inbound_mod extends CI_Model
   {
     $this->db->insert_batch("inbound_item", $item);
     return $this->db->affected_rows();
+  }
+
+
+  public function getItem($id = "", $inbound_id = "")
+  {
+    if (!empty($id)) {
+      $this->db->where("id", $id);
+    }
+    if (!empty($inbound_id)) {
+      $this->db->where("inbound_id", $inbound_id);
+    }
+    return $this->db->get("inbound_item");
   }
 }

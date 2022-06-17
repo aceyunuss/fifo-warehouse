@@ -72,4 +72,12 @@ class Inbound extends Core_Controller
     }
     echo "<script>alert('$msg menginput data'); location.href='" . site_url('inbound') . "';</script>";
   }
+
+
+  public function view($id)
+  {
+    $de['inb'] = $this->Inbound_mod->get($id)->row_array();
+    $de['itm'] = $this->Inbound_mod->getItem("", $id)->result_array();
+    $this->template("inbound/inboundvw_vw", "Bukti Penerimaan Barang", $de);
+  }
 }

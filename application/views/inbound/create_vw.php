@@ -12,7 +12,7 @@
         <form role="form text-left" action="<?= site_url('inbound/new_inp') ?>" method="POST" id="submitform">
 
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">
+            <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">Supplier</h6>
             </label>
             <div class="col-sm-4">
@@ -25,7 +25,7 @@
             </div>
             <div class="col-sm-1">
             </div>
-            <label class="col-sm-1 col-form-label">
+            <label class="col-sm-1 control-label">
               <h6 class="mb-1 text-dark text-sm">BPB No</h6>
             </label>
             <div class="col-sm-3">
@@ -34,7 +34,7 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">
+            <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">Delivery Order Date</h6>
             </label>
             <div class="col-sm-4">
@@ -42,7 +42,7 @@
             </div>
             <div class="col-sm-1">
             </div>
-            <label class="col-sm-1 col-form-label">
+            <label class="col-sm-1 control-label">
               <h6 class="mb-1 text-dark text-sm">BPB Date</h6>
             </label>
             <div class="col-sm-3">
@@ -51,7 +51,7 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">
+            <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">PO No</h6>
             </label>
             <div class="col-sm-3">
@@ -59,7 +59,7 @@
             </div>
             <div class="col-sm-2">
             </div>
-            <label class="col-sm-1 col-form-label">
+            <label class="col-sm-1 control-label">
               <h6 class="mb-1 text-dark text-sm">Note</h6>
             </label>
             <div class="col-sm-3">
@@ -73,7 +73,7 @@
 
 
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">
+            <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">Item</h6>
             </label>
             <div class="col-sm-8">
@@ -87,7 +87,7 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">
+            <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">Category</h6>
             </label>
             <div class="col-sm-3">
@@ -99,7 +99,7 @@
               </select>
             </div>
             <div class="col-sm-1"></div>
-            <label class="col-sm-2 col-form-label">
+            <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">Panjang</h6>
             </label>
             <div class="col-sm-2">
@@ -108,14 +108,14 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">
+            <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">Qty</h6>
             </label>
             <div class="col-sm-2">
               <input type="number" maxlength="255" class="form-control" id="qty">
             </div>
             <div class="col-sm-2"></div>
-            <label class="col-sm-2 col-form-label">
+            <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">Lebar</h6>
             </label>
             <div class="col-sm-2">
