@@ -11,7 +11,7 @@ class Req_mod extends CI_Model
   {
     $this->db->insert("request", $data);
 
-    return $this->db->affected_rows();
+    return $this->db->insert_id();
   }
 
 
