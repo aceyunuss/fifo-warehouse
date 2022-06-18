@@ -17,6 +17,7 @@ class Inbound extends Core_Controller
 
   public function index()
   {
+    $this->db->where('status !=', "Selesai");
     $data['logs'] = $this->Inbound_mod->get()->result_array();
     $this->template("inbound/inboundlist_vw", "Barang Masuk", $data);
   }

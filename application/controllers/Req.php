@@ -17,6 +17,7 @@ class Req extends Core_Controller
 
   public function index()
   {
+    $this->db->where('status !=', "Selesai");
     $data['logs'] = $this->Req_mod->get()->result_array();
     $this->template("req/reqlist_vw", "Permintaan Barang", $data);
   }
