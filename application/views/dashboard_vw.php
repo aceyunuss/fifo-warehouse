@@ -5,10 +5,9 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Supplier &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
               <h5 class="font-weight-bolder mb-0">
-                $53,000
-                <span class="text-success text-sm font-weight-bolder">+55%</span>
+                <?= $supp ?>
               </h5>
             </div>
           </div>
@@ -27,10 +26,9 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Barang &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</p>
               <h5 class="font-weight-bolder mb-0">
-                2,300
-                <span class="text-success text-sm font-weight-bolder">+3%</span>
+                <?= $item ?>
               </h5>
             </div>
           </div>
@@ -49,10 +47,9 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Transaksi Barang Masuk</p>
               <h5 class="font-weight-bolder mb-0">
-                +3,462
-                <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                <?= $inb ?>
               </h5>
             </div>
           </div>
@@ -71,10 +68,9 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Transaksi Barang Keluar</p>
               <h5 class="font-weight-bolder mb-0">
-                $103,430
-                <span class="text-success text-sm font-weight-bolder">+5%</span>
+                <?= $out ?>
               </h5>
             </div>
           </div>
@@ -89,7 +85,7 @@
   </div>
 </div>
 <div class="row mt-4">
-  <div class="col-lg-6 mb-lg-0 mb-4">
+  <div class="col-lg-12 mb-lg-0 mb-12">
     <div class="card">
       <div class="card-header pb-0 px-3">
         <h6 class="mb-0">List Pekerjaan</h6>
@@ -119,20 +115,27 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-6">
-    <div class="card z-index-2">
-      <div class="card-header pb-0">
-        <h6>Sales overview</h6>
-        <p class="text-sm">
-          <i class="fa fa-arrow-up text-success"></i>
-          <span class="font-weight-bold">4% more</span> in 2021
-        </p>
-      </div>
-      <div class="card-body p-3">
-        <div class="chart">
-          <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
+
+<script>
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+
+  function success(pos) {
+    const crd = pos.coords;
+
+    console.log('Your current position is:');
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+    console.log(`More or less ${crd.accuracy} meters.`);
+  }
+
+  function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  navigator.geolocation.getCurrentPosition(success, error, options);
+</script>

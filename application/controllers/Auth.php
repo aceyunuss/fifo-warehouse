@@ -14,7 +14,14 @@ class Auth extends Core_Controller
   public function index()
   {
     if ($this->session->userdata('status') == 'granted') {
+      $this->load->model(['User_mod', 'Item_mod', 'Inbound_mod', 'Outbound_mod']);
+
       $data['todo'] = $this->Mst_mod->getTodo()->result_array();
+      $data['supp'] = $this->Mst_mod->getSupp()->num_rows();
+      $data['item'] = $this->Item_mod->getStock()->num_rows();
+      $data['inb'] = $this->Inbound_mod->get()->num_rows();
+      $data['out'] = $this->Outbound_mod->get()->num_rows();
+
       $this->template('dashboard_vw', "Dashboard", $data);
     } else {
       $this->session->sess_destroy();
@@ -34,7 +41,7 @@ class Auth extends Core_Controller
       $pass = md5($this->input->post('password'));
 
       $user = $this->User_mod->loginUser($username, $pass)->row_array();
-      
+
       if (is_null($user) || empty($user)) {
         echo "<script>alert('Username atau password tidak sesuai'); location.href='" . site_url('auth') . "';</script>";
       } else {
@@ -42,7 +49,7 @@ class Auth extends Core_Controller
           'user_id' => $user['id'],
           'name'    => $user['complete_name'],
           'status'  => 'granted',
-          'position'=> $user['position']
+          'position' => $user['position']
         ];
         $this->session->set_userdata($us);
         redirect('dashboard');
