@@ -114,7 +114,7 @@
           <br>
           <br>
           <div class="text-center">
-            <button type="submit" class="btn bg-gradient-dark">Submit</button>
+            <button type="submit" class="btn bg-gradient-dark">Approve</button>
           </div>
         </form>
       </div>
