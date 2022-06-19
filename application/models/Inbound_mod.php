@@ -84,8 +84,13 @@ class Inbound_mod extends CI_Model
   {
     $itm = $this->getItem("", $id)->result_array();
 
+    $supp = $this->db->select("code")->where("inbound.id", $id)->join("supplier", "supp_id=supplier.id", "left")->get("inbound")->row()->code;
+
     foreach ($itm as $key => $value) {
       $av = $this->avail($value['item_id'], $value['length'], $value['width']);
+      $n = $this->db->get("item_stock")->num_rows();
+      ++$n;
+      $ur = str_repeat(0, 3 - strlen($n)) . $n;
 
       if (is_null($av)) {
         $st = [
@@ -94,7 +99,8 @@ class Inbound_mod extends CI_Model
           'dsc'     => $value['description'],
           'lg'      => $value['length'],
           'wd'      => $value['width'],
-          'cat'     => $value['category']
+          'cat'     => $value['category'],
+          'code'    => $value['category'] . "-" . $supp . "-" . $ur
         ];
 
         $this->db->insert("item_stock", $st);
