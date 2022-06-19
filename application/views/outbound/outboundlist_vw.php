@@ -6,9 +6,11 @@
           <div class="col-6 d-flex align-items-center">
             <h6 class="mb-0"><?= $title ?></h6>
           </div>
-          <div class="col-6 text-end">
-            <a class="btn bg-gradient-dark mb-0" href="<?= site_url('outbound/create') ?>"><i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Buat STB</a>
-          </div>
+          <?php if ($this->session->userdata('position') == "Admin Gudang") { ?>
+            <div class="col-6 text-end">
+              <a class="btn bg-gradient-dark mb-0" href="<?= site_url('outbound/create') ?>"><i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Buat STB</a>
+            </div>
+          <?php } ?>
         </div>
       </div>
       <div class="card-body px-0 pt-0 pb-2">

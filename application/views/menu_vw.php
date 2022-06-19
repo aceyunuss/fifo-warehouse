@@ -29,7 +29,7 @@
           <span class="nav-link-text ms-1">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item rg">
         <a class="nav-link  " href="<?= site_url('user') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -50,7 +50,7 @@
           <span class="nav-link-text ms-1">User Access</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item rg">
         <a class="nav-link  " href="<?= site_url('item') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -72,7 +72,7 @@
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item rg">
         <a class="nav-link  " href="<?= site_url('inbound') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -92,7 +92,7 @@
           <span class="nav-link-text ms-1">Barang Masuk</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item rg">
         <a class="nav-link  " href="<?= site_url('outbound') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -114,7 +114,7 @@
           <span class="nav-link-text ms-1">Barang Keluar</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item rp">
         <a class="nav-link  " href="<?= site_url('req') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -157,3 +157,21 @@
     </ul>
   </div>
 </aside>
+
+<script>
+  let pos = "<?= $this->session->userdata('position') ?>"
+  switch (pos) {
+    case "Admin Gudang":
+      $('.rp').hide();
+      break;
+    case "PPIC":
+      $('.rp, .rg').hide();
+      break;
+    case "Purchase":
+      $('.rp, .rg').hide();
+      break;
+    case "Kabag Produksi":
+      $('.rg').hide();
+      break;
+  }
+</script>

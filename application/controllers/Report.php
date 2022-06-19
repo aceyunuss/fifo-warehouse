@@ -21,10 +21,29 @@ class Report extends Core_Controller
 
   public function index()
   {
+    $pos = $this->session->userdata('position');
+
+    switch ($pos) {
+      case 'Admin Gudang':
+        $m = ['in', 'out', 'itm'];
+        break;
+      case 'PPIC':
+        $m = ['in'];
+        break;
+      case 'Purchase':
+        $m = ['in'];
+        break;
+      case 'Kabag Produksi':
+        $m = ['req', 'out'];
+        break;
+    }
+
+    $data['menu'] = $m;
+
     $this->db->where("status", "Selesai");
     $data['in'] = $this->Inbound_mod->get()->result_array();
 
-    // $this->db->where("status", "Selesai");
+    $this->db->where("status", "Selesai");
     $data['out'] = $this->Outbound_mod->get()->result_array();
 
     $this->db->where("status", "Selesai");
