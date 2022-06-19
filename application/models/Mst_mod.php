@@ -68,4 +68,12 @@ class Mst_mod extends CI_Model
     }
     return $this->db->get("item_stock");
   }
+
+  public function getLot($id = "")
+  {
+    if (!empty($id)) {
+      $this->db->where('lot_id', $id);
+    }
+    return $this->db->get("item_lot");
+  }
 }

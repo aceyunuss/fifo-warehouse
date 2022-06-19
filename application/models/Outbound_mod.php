@@ -11,7 +11,7 @@ class Outbound_mod extends CI_Model
   {
     $this->db->insert("outbound", $data);
 
-    return $this->db->affected_rows();
+    return $this->db->insert_id();
   }
 
 
@@ -41,5 +41,23 @@ class Outbound_mod extends CI_Model
 
     return "STB-MOS-WH-" . $alp[$mt] . "-" . $ur;
   }
+  
+  public function insertItem($item)
+  {
+    $this->db->insert_batch("outbound_item", $item);
+    return $this->db->affected_rows();
+  }
+
+  public function getItem($id = "", $outbound_id = "")
+  {
+    if (!empty($id)) {
+      $this->db->where("id", $id);
+    }
+    if (!empty($outbound_id)) {
+      $this->db->where("outbound_id", $outbound_id);
+    }
+    return $this->db->get("outbound_item");
+  }
+
 
 }

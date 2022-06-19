@@ -16,9 +16,9 @@
           <table id="datatebel" class="table align-items-center mb-0">
             <thead>
               <tr>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB No</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB Date</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPB No</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPK No</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPB Date</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
@@ -27,19 +27,19 @@
               <?php foreach ($logs as $key => $value) { ?>
                 <tr class="text-center">
                   <td>
+                    <p class="text-sm mb-0"><?= $value['stb'] ?></p>
+                  </td>
+                  <td>
+                    <p class="text-sm mb-0"><?= substr($value['stb_date'], 0, 10) ?></p>
+                  </td>
+                  <td>
                     <p class="text-sm mb-0"><?= $value['spb'] ?></p>
-                  </td>
-                  <td>
-                    <p class="text-sm mb-0"><?= $value['spk'] ?></p>
-                  </td>
-                  <td>
-                    <p class="text-sm mb-0"><?= substr($value['spb_date'], 0, 10) ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['status'] ?></p>
                   </td>
                   <td>
-                    <a href="<?= site_url('req/view/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Lihat</a>
+                    <a href="<?= site_url('outbound/view/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Lihat</a>
                   </td>
                 </tr>
               <?php } ?>

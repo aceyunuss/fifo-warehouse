@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="card-body">
-        <form role="form text-left" action="<?= site_url('user/new_inp') ?>" method="POST">
+        <form role="form text-left" action="<?= site_url('outbound/new_inp') ?>" method="POST">
 
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">
@@ -58,7 +58,7 @@
               <thead>
                 <tr>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">No. Lot</th>
-                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Category</th> -->
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Code</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
                   <th colspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Size</th>
@@ -105,22 +105,30 @@
 
             cale = JSON.parse(data)
             let tbody = "";
-            $('#itm').html('')
-            let sel = ('<option>-- Pilih Barang --</option>');
+            $('.item_table tbody').html('')
+
             for (let x in cale) {
               itm = cale[x];
+              sel = "";
+              for (let i in itm.lot) {
+                l = itm.lot[i];
+                sel += "<option value='" + l.lot_id + "'>" + l.lot + "(" + l.qty + ")</option>"
+              }
 
               tbody += '<tr class="text-center">\
                   <td>\
                     <div class="col-sm-12">\
-                      <select class="select2 selboy" name="states[]" multiple="multiple" style=\'width:100%\'>\
-                        <option value="AL">Alabama</option>\
-                        <option value="WY">Wyoming</option>\
+                      <select class="select2 selboy" name="lot[' + itm.stock_id + '][]" multiple="multiple" style=\'width:100%\'>\
+                        ' + sel + '\
                       </select>\
                     </div>\
                   </td>\
                   <td>\
+                    <p class="text-sm mb-0">' + itm.code + '</p>\
+                  </td>\
+                  <td>\
                     <p class="text-sm mb-0">' + itm.description + '</p>\
+                    <input type="hidden" value="' + itm.stock_id + '" name="stock_id[]">\
                   </td>\
                   <td>\
                     <p class="text-sm mb-0">' + itm.name + '</p>\
