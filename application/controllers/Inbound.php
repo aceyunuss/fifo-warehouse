@@ -42,6 +42,7 @@ class Inbound extends Core_Controller
       'supp_id' => $dat['supp'],
       'do_date' => $dat['dodate'],
       'po'      => $dat['po'],
+      'do'      => $dat['do'],
       'bpb'     => $dat['bpb'],
       'bpb_date' => $dat['bpbdate'],
       'note'    => $dat['note'],

@@ -35,9 +35,12 @@
 
           <div class="form-group row">
             <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Delivery Order Date</h6>
+              <h6 class="mb-1 text-dark text-sm">Delivery Order / Date</h6>
             </label>
-            <div class="col-sm-4">
+            <div class="col-sm-2">
+              <input type="text" maxlength="255" class="form-control" name="do" required>
+            </div>
+            <div class="col-sm-2">
               <input type="date" class="form-control" name="dodate" required>
             </div>
             <div class="col-sm-1">
@@ -100,11 +103,12 @@
             </div>
             <div class="col-sm-1"></div>
             <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Panjang</h6>
+              <h6 class="mb-1 text-dark text-sm">Lebar</h6>
             </label>
             <div class="col-sm-2">
-              <input type="number" maxlength="255" class="form-control" id="le">
+              <input type="number" maxlength="255" class="form-control" id="wi">
             </div>
+            <div class="col-sm-1">cm</div>
           </div>
 
           <div class="form-group row">
@@ -116,11 +120,12 @@
             </div>
             <div class="col-sm-2"></div>
             <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Lebar</h6>
+              <h6 class="mb-1 text-dark text-sm">Panjang</h6>
             </label>
             <div class="col-sm-2">
-              <input type="number" maxlength="255" class="form-control" id="wi">
+              <input type="number" maxlength="255" class="form-control" id="le">
             </div>
+            <div class="col-sm-1">cm</div>
           </div>
 
           <center>
@@ -146,8 +151,8 @@
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">UOM</th>
                 </tr>
                 <tr>
-                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Lebar</th>
-                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Panjang</th>
+                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Lebar (cm)</th>
+                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Panjang (cm)</th>
                 </tr>
               </thead>
               <tbody>

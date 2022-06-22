@@ -69,8 +69,8 @@
                 <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">UOM</th>
               </tr>
               <tr>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Lebar</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Panjang</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Lebar (cm)</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Panjang (cm)</th>
               </tr>
             </thead>
             <tbody>

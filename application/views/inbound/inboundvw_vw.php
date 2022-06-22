@@ -28,9 +28,12 @@
 
         <div class="form-group row">
           <label class="col-sm-2 control-label">
-            <h6 class="mb-1 text-dark text-sm">Delivery Order Date</h6>
+            <h6 class="mb-1 text-dark text-sm">Delivery Order / Date</h6>
           </label>
-          <div class="col-sm-4">
+          <div class="col-sm-2">
+            <p class="form-control-static"><?= $inb['do'] ?></p>
+          </div>
+          <div class="col-sm-2">
             <p class="form-control-static"><?= substr($inb['do_date'], 0, 10) ?></p>
           </div>
           <div class="col-sm-1">
@@ -75,36 +78,36 @@
                 <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">UOM</th>
               </tr>
               <tr>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Lebar</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Panjang</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Lebar (cm)</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Panjang (cm)</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ((array)$itm as $key => $value) { ?>
-              <tr class="text-center">
-                <td>
-                  <p class="text-sm mb-0"><?= $value['category'] ?></p>
-                </td>
-                <td>
-                  <p class="text-sm mb-0"><?= $value['description'] ?></p>
-                </td>
-                <td>
-                  <p class="text-sm mb-0"><?= $value['name'] ?></p>
-                </td>
-                <td>
-                  <p class="text-sm mb-0"><?= $value['width'] ?></p>
-                </td>
-                <td>
-                  <p class="text-sm mb-0"><?= $value['length'] ?></p>
-                </td>
-                <td>
-                  <p class="text-sm mb-0"><?= $value['qty'] ?></p>
-                </td>
-                <td>
-                  <p class="text-sm mb-0">ROLL</p>
-                </td>
-              </tr>
-            <?php } ?>
+                <tr class="text-center">
+                  <td>
+                    <p class="text-sm mb-0"><?= $value['category'] ?></p>
+                  </td>
+                  <td>
+                    <p class="text-sm mb-0"><?= $value['description'] ?></p>
+                  </td>
+                  <td>
+                    <p class="text-sm mb-0"><?= $value['name'] ?></p>
+                  </td>
+                  <td>
+                    <p class="text-sm mb-0"><?= $value['width'] ?></p>
+                  </td>
+                  <td>
+                    <p class="text-sm mb-0"><?= $value['length'] ?></p>
+                  </td>
+                  <td>
+                    <p class="text-sm mb-0"><?= $value['qty'] ?></p>
+                  </td>
+                  <td>
+                    <p class="text-sm mb-0">ROLL</p>
+                  </td>
+                </tr>
+              <?php } ?>
             </tbody>
           </table>
         </div>
