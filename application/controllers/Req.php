@@ -27,7 +27,7 @@ class Req extends Core_Controller
   {
     $data['spb'] = $this->Req_mod->getNum();
     $data['cat'] = $this->Mst_mod->getCat();
-    $this->template("req/create_vw", "Permintaan Barang", $data);
+    $this->template("req/create_vw", "Surat Permintaan Barang", $data);
   }
 
   public function get_stock()
@@ -87,14 +87,14 @@ class Req extends Core_Controller
   {
     $de['req'] = $this->Req_mod->get($id)->row_array();
     $de['itm'] = $this->Req_mod->getItem("", $id)->result_array();
-    $this->template("req/reqvw_vw", "Permintaan Barang", $de);
+    $this->template("req/reqvw_vw", "Surat Permintaan Barang", $de);
   }
   
   public function process($id)
   {
     $de['req'] = $this->Req_mod->get($id)->row_array();
     $de['itm'] = $this->Req_mod->getItem("", $id)->result_array();
-    $this->template("req/reqprc_vw", "Permintaan Barang", $de);
+    $this->template("req/reqprc_vw", "Surat Permintaan Barang", $de);
   }
 
 

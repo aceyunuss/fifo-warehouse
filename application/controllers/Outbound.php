@@ -25,7 +25,7 @@ class Outbound extends Core_Controller
   public function create()
   {
     $data['stb'] = $this->Outbound_mod->getNum();
-    $this->template("outbound/create_vw", "Barang Keluar", $data);
+    $this->template("outbound/create_vw", "Serah Terima Barang", $data);
   }
 
 
@@ -105,7 +105,7 @@ class Outbound extends Core_Controller
       $de['itm'][$key]['lot'] = implode(", ", $lot);
     }
 
-    $this->template("outbound/outboundvw_vw", "Barang Keluar", $de);
+    $this->template("outbound/outboundvw_vw", "Serah Terima Barang", $de);
   }
 
   public function process($id)
@@ -121,7 +121,7 @@ class Outbound extends Core_Controller
 
       $de['itm'][$key]['lot'] = implode(", ", $lot);
     }
-    $this->template("outbound/outboundprc_vw", "Barang Keluar", $de);
+    $this->template("outbound/outboundprc_vw", "Serah Terima Barang", $de);
   }
 
 

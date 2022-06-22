@@ -144,7 +144,7 @@
           $('#itm').html('')
           let sel = ('<option>-- Pilih Barang --</option>');
           for (let x in cale) {
-            sel += "<option value = '" + cale[x].stock_id + "'>" + cale[x].dsc + " | " + cale[x].nm + " | " + cale[x].lg + " x " + cale[x].wd + "</option>";
+            sel += "<option value = '" + cale[x].stock_id + "'>" + cale[x].dsc + " | " + cale[x].nm + " | " + cale[x].wd + " x " + cale[x].lg + "</option>";
           }
           $('#itm').html(sel)
         },
@@ -185,12 +185,12 @@
                     <p class="text-sm mb-0">' + name + '</p>\
                   </td>\
                   <td>\
-                    <p class="text-sm mb-0">' + wi + '</p>\
-                    <input type="hidden" value="' + wi + '" name="width[]">\
-                  </td>\
-                  <td>\
                     <p class="text-sm mb-0">' + le + '</p>\
                     <input type="hidden" value="' + le + '" name="length[]">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + wi + '</p>\
+                    <input type="hidden" value="' + wi + '" name="width[]">\
                   </td>\
                   <td>\
                     <p class="text-sm mb-0">' + qty + '</p>\

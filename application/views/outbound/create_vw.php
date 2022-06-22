@@ -134,12 +134,12 @@
                     <p class="text-sm mb-0">' + itm.name + '</p>\
                   </td>\
                   <td>\
-                    <p class="text-sm mb-0">' + itm.width + '</p>\
-                    <input type="hidden" value="' + itm.width + '" name="width[]">\
-                  </td>\
-                  <td>\
                     <p class="text-sm mb-0">' + itm.length + '</p>\
                     <input type="hidden" value="' + itm.length + '" name="length[]">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + itm.width + '</p>\
+                    <input type="hidden" value="' + itm.width + '" name="width[]">\
                   </td>\
                   <td>\
                     <p class="text-sm mb-0">' + itm.qty + '</p>\

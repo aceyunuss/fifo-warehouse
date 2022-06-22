@@ -43,16 +43,7 @@
           </div>
         </div>
 
-        <div class="form-group row">
-          <div class="col-sm-6">
-          </div>
-          <label class="col-sm-2 form-label">
-            <h6 class="mb-1 text-dark text-sm">Item Category</h6>
-          </label>
-          <div class="col-sm-3">
-            <p class="form-static"><?= $req['category'] ?></p>
-          </div>
-        </div>
+   
         <br>
         <hr class="horizontal dark mt-0">
         <br>
@@ -86,10 +77,10 @@
                     <p class="text-sm mb-0"><?= $value['name'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['width'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['length'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['length'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['width'] ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['qty'] ?></p>

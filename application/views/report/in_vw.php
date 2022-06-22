@@ -29,13 +29,13 @@
                     <p class="text-sm mb-0"><?= $value['bpb'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['supp_id'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['supp_name'] ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= substr($value['bpb_date'], 0, 10) ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['do_date'] ?></p>
+                    <p class="text-sm mb-0"><?= substr($value['do_date'], 0, 10) ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['po'] ?></p>

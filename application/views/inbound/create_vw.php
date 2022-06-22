@@ -190,7 +190,7 @@
 
       if (item_id == "" || cat == "" || qty == "" || le == "" || wi == "") {
 
-        alert("Form item harus dilelngkapi")
+        alert("Form item harus dilengkapi")
 
       } else {
 

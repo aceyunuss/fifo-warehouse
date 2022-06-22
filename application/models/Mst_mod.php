@@ -53,6 +53,10 @@ class Mst_mod extends CI_Model
         $st = "11";
         break;
 
+      case 'Kabag Produksi':
+        $st = "21";
+        break;
+
       default:
         $st = "66";
         break;
