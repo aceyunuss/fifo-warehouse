@@ -13,7 +13,7 @@
 
           <div class="form-group row">
             <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Supplier</h6>
+              <h6 class="mb-1 text-dark text-sm">Supplier Code - Name</h6>
             </label>
             <div class="col-sm-4">
               <select class="form-control select2" required name="supp">
@@ -26,7 +26,7 @@
             <div class="col-sm-1">
             </div>
             <label class="col-sm-1 control-label">
-              <h6 class="mb-1 text-dark text-sm">BPB No</h6>
+              <h6 class="mb-1 text-dark text-sm">BPB No.</h6>
             </label>
             <div class="col-sm-3">
               <input type="text" maxlength="255" class="form-control" name="bpb" readonly value="<?= $bpb ?>">
@@ -35,7 +35,7 @@
 
           <div class="form-group row">
             <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Delivery Order / Date</h6>
+              <h6 class="mb-1 text-dark text-sm">Delivery Order - Date</h6>
             </label>
             <div class="col-sm-2">
               <input type="text" maxlength="255" class="form-control" name="do" required>
@@ -55,7 +55,7 @@
 
           <div class="form-group row">
             <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">PO No</h6>
+              <h6 class="mb-1 text-dark text-sm">PO No.</h6>
             </label>
             <div class="col-sm-3">
               <input type="text" maxlength="255" class="form-control" name="po" required>
