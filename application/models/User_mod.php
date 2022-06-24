@@ -14,10 +14,10 @@ class User_mod extends CI_Model
     return $this->db->affected_rows();
   }
 
-  
+
   public function loginUser($username, $password)
   {
-    $this->db->where(['username' => $username]);
+    $this->db->where(['username' => $username, 'password' => $password]);
     return $this->db->get("user");
   }
 

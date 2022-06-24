@@ -84,7 +84,7 @@ class Inbound_mod extends CI_Model
   {
     $itm = $this->getItem("", $id)->result_array();
 
-    $supp = $this->db->select("code")->where("inbound.id", $id)->join("supplier", "supp_id=supplier.id", "left")->get("inbound")->row()->code;
+    $supp = $this->db->select("code, supp_name")->where("inbound.id", $id)->join("supplier", "supp_id=supplier.id", "left")->get("inbound")->row_array();
 
     foreach ($itm as $key => $value) {
       $av = $this->avail($value['item_id'], $value['length'], $value['width']);
@@ -100,7 +100,8 @@ class Inbound_mod extends CI_Model
           'lg'      => $value['length'],
           'wd'      => $value['width'],
           'cat'     => $value['category'],
-          'code'    => $value['category'] . "-" . $supp . "-" . $ur
+          'supp'    => $supp['supp_name'],
+          'code'    => $value['category'] . "-" . $supp['code'] . "-" . $ur
         ];
 
         $this->db->insert("item_stock", $st);
@@ -130,7 +131,8 @@ class Inbound_mod extends CI_Model
         $lot = [
           'stock_id'  => $sid,
           'lot'       => $lid,
-          'qty'       => $value['qty']
+          'qty'       => $value['qty'],
+          'incoming'  => $value['incoming']
         ];
         $this->db->insert("item_lot", $lot);
       } else {

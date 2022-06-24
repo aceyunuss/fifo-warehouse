@@ -4,7 +4,7 @@
       <div class="card-header pb-0">
         <div class="row">
           <div class="col-6 d-flex align-items-center">
-            <h6 class="mb-0"><?= $title ?> Barang Masuk</h6>
+            <h6 class="mb-0"><?= ($this->session->userdata('position') == "Admin Gudang") ? $title . " Barang Masuk" : $title . " Bukti Penerimaan Barang"; ?></h6>
           </div>
         </div>
       </div>

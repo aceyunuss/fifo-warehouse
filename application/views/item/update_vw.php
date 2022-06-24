@@ -10,12 +10,20 @@
       </div>
       <div class="card-body">
         <form role="form text-left" action="<?= site_url('item/upd_inp') ?>" method="POST" id="submitform">
-        <div class="form-group row">
+          <div class="form-group row">
             <label class="col-sm-2 form-label">
               <h6 class="mb-1 text-dark text-sm">Item Code</h6>
             </label>
             <div class="col-sm-6">
               <p class="form-control-static"><?= $itm['code'] ?></p>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 form-label">
+              <h6 class="mb-1 text-dark text-sm">Supplier</h6>
+            </label>
+            <div class="col-sm-6">
+              <p class="form-control-static"><?= $itm['supp'] ?></p>
             </div>
           </div>
           <div class="form-group row">

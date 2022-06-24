@@ -72,6 +72,7 @@
             <table class="table align-items-center mb-0 item_table">
               <thead>
                 <tr>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Waktu</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Category</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
@@ -87,6 +88,9 @@
               <tbody>
                 <?php foreach ((array)$itm as $key => $value) { ?>
                   <tr class="text-center">
+                    <td>
+                      <p class="text-sm mb-0"><?= $value['incoming'] ?></p>
+                    </td>
                     <td>
                       <p class="text-sm mb-0"><?= $value['category'] ?></p>
                     </td>

@@ -77,20 +77,6 @@
 
           <div class="form-group row">
             <label class="col-sm-2 control-label">
-              <h6 class="mb-1 text-dark text-sm">Item</h6>
-            </label>
-            <div class="col-sm-8">
-              <select class="form-control select2" id="itm">
-                <option value="">-- Pilih Barang --</option>
-                <?php foreach ($item as $key => $value) { ?>
-                  <option value="<?= $value['id'] ?>"><?= $value['description'] . ' | ' . $value['name'] ?></option>
-                <?php } ?>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">Category</h6>
             </label>
             <div class="col-sm-3">
@@ -101,12 +87,22 @@
                 <?php } ?>
               </select>
             </div>
-            <div class="col-sm-1"></div>
+          </div>
+
+          <div class="form-group row">
             <label class="col-sm-2 control-label">
+              <h6 class="mb-1 text-dark text-sm">Item</h6>
+            </label>
+            <div class="col-sm-5">
+              <select class="form-control select2" id="itm">
+              </select>
+            </div>
+            <label class="col-sm-1 control-label">
               <h6 class="mb-1 text-dark text-sm">Lebar</h6>
             </label>
             <div class="col-sm-2">
-              <input type="number" maxlength="255" class="form-control" id="wi">
+              <select class="form-control" id="wi">
+              </select>
             </div>
             <div class="col-sm-1">cm</div>
           </div>
@@ -118,12 +114,13 @@
             <div class="col-sm-2">
               <input type="number" maxlength="255" class="form-control" id="qty">
             </div>
-            <div class="col-sm-2"></div>
-            <label class="col-sm-2 control-label">
+            <div class="col-sm-3"></div>
+            <label class="col-sm-1 control-label">
               <h6 class="mb-1 text-dark text-sm">Panjang</h6>
             </label>
             <div class="col-sm-2">
-              <input type="number" maxlength="255" class="form-control" id="le">
+              <select class="form-control" id="le">
+              </select>
             </div>
             <div class="col-sm-1">cm</div>
           </div>
@@ -143,6 +140,7 @@
               <thead>
                 <tr>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">#</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Waktu</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Category</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
@@ -176,6 +174,41 @@
 <script>
   $(document).ready(function() {
 
+    $('#cat').change(function() {
+
+      let cat = $(this).val()
+      $.ajax({
+        type: "POST",
+        url: '<?= site_url('inbound/get_item') ?>',
+        data: {
+          cat: cat,
+        },
+        success: function(data, textStatus, jQxhr) {
+          cale = JSON.parse(data)
+
+          $('#itm').html('')
+          let sel = ('<option>-- Pilih Barang --</option>');
+          let selp = ('<option>-- Pilih --</option>');
+          let sell = ('<option>-- Pilih --</option>');
+
+          for (let x in cale.item) {
+            sel += "<option value = '" + cale.item[x].id + "'>" + cale.item[x].description + " | " + cale.item[x].name + "</option>";
+          }
+          $('#itm').html(sel)
+
+          for (let x in cale.sz.wi) {
+            selp += "<option value = '" + cale.sz.wi[x] + "'>" + cale.sz.wi[x] + "</option>";
+          }
+          $('#wi').html(selp)
+
+          for (let x in cale.sz.le) {
+            sell += "<option value = '" + cale.sz.le[x] + "'>" + cale.sz.le[x] + "</option>";
+          }
+          $('#le').html(sell)
+        },
+      });
+    })
+
 
     $('.add').click(function() {
       let counter = $('.item_table tr').length + 1;
@@ -187,6 +220,16 @@
       let qty = $('#qty').val()
       let le = $('#le').val()
       let wi = $('#wi').val()
+      let d = new Date;
+      let time = [
+        d.getFullYear(),
+        d.getMonth() + 1,
+        d.getDate(),
+      ].join('/') + ' ' + [d.getHours(),
+        d.getMinutes(),
+        d.getSeconds()
+      ].join(':');
+
 
       if (item_id == "" || cat == "" || qty == "" || le == "" || wi == "") {
 
@@ -198,6 +241,10 @@
                   <td>\
                     <i class="fa fa-trash text-danger remove"></i>\
                     <input type="hidden" value="' + item_id + '" name="item_id[]">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + time + '</p>\
+                    <input type="hidden" value="' + time + '" name="time[]">\
                   </td>\
                   <td>\
                     <p class="text-sm mb-0">' + cat + '</p>\

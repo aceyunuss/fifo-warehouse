@@ -40,11 +40,13 @@
             <label class="col-sm-2 col-form-label">
               <h6 class="mb-1 text-dark text-sm">SPB No</h6>
             </label>
-            <div class="col-sm-2">
-              <input type="text" maxlength="255" class="form-control" name="spb" id="spb">
-            </div>
-            <div class="col-sm-1">
-              <a href="#" class="btn bg-gradient-primary btn-md fin"><i class="fas fa-search"></i></a>
+            <div class="col-sm-3">
+              <select class="form-control" name="spb" id="spb">
+                <option value="">-- Pilih --</option>
+                <?php foreach ($spb as $v) { ?>
+                  <option value="<?= $v ?>"><?= $v ?></option>
+                <?php } ?>
+              </select>
             </div>
           </div>
 
@@ -89,7 +91,7 @@
 <script>
   $(document).ready(function() {
 
-    $('.fin').click(function() {
+    $('#spb').change(function() {
 
       let spb = $("#spb").val()
 
@@ -112,7 +114,7 @@
               sel = "";
               for (let i in itm.lot) {
                 l = itm.lot[i];
-                sel += "<option value='" + l.lot_id + "'>" + l.lot + "(" + l.qty + ")</option>"
+                sel += "<option value='" + l.lot_id + "'>" + l.incoming + " (" + l.qty + ")</option>"
               }
 
               tbody += '<tr class="text-center">\

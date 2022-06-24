@@ -46,7 +46,7 @@ class Inbound extends Core_Controller
       'bpb'     => $dat['bpb'],
       'bpb_date' => $dat['bpbdate'],
       'note'    => $dat['note'],
-      'status_id'=> 1,
+      'status_id' => 1,
       'status'  => "Menunggu Persetujuan"
     ];
 
@@ -63,6 +63,7 @@ class Inbound extends Core_Controller
       $itm[$key]['qty']         = $dat['qty'][$key];
       $itm[$key]['length']      = $dat['length'][$key];
       $itm[$key]['width']       = $dat['width'][$key];
+      $itm[$key]['incoming']    = $dat['time'][$key];
     }
 
     $this->Inbound_mod->insertItem($itm);
@@ -123,5 +124,30 @@ class Inbound extends Core_Controller
       $msg = "Gagal";
     }
     echo "<script>alert('$msg memproses data'); location.href='" . site_url('inbound') . "';</script>";
+  }
+
+
+  public function get_item()
+  {
+    $cat = $this->input->post('cat');
+    $this->db->where('cat', $cat);
+    $re['item'] = $this->Mst_mod->getItem()->result_array();
+
+    switch ($cat) {
+      case 'RML':
+        $l = [20, 25, 30];
+        $p = [5000, 10000];
+      case 'RMP':
+        $l = [70, 100, 140];
+        $p = [5000, 10000, 30000];
+      case 'DT':
+        $l = [70, 100, 140];
+        $p = [5000, 10000, 30000];
+        break;
+    }
+
+    $re['sz'] = ['le' => $p, 'wi' => $l];
+
+    echo json_encode($re);
   }
 }

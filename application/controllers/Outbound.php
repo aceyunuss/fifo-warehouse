@@ -24,7 +24,16 @@ class Outbound extends Core_Controller
 
   public function create()
   {
+    $this->load->model("Req_mod");
     $data['stb'] = $this->Outbound_mod->getNum();
+    $stb = $this->Outbound_mod->get()->result_array();
+    if(!empty($stb)){
+      $sl = array_column($stb, "spb");
+      $this->db->where_not_in("spb", $sl);
+    }
+    $spb = $this->Req_mod->get()->result_array();
+    $data['spb'] = array_column($spb, "spb");
+    
     $this->template("outbound/create_vw", "Serah Terima Barang", $data);
   }
 
