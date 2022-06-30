@@ -27,13 +27,13 @@ class Outbound extends Core_Controller
     $this->load->model("Req_mod");
     $data['stb'] = $this->Outbound_mod->getNum();
     $stb = $this->Outbound_mod->get()->result_array();
-    if(!empty($stb)){
+    if (!empty($stb)) {
       $sl = array_column($stb, "spb");
       $this->db->where_not_in("spb", $sl);
     }
     $spb = $this->Req_mod->get()->result_array();
     $data['spb'] = array_column($spb, "spb");
-    
+
     $this->template("outbound/create_vw", "Serah Terima Barang", $data);
   }
 
@@ -48,8 +48,15 @@ class Outbound extends Core_Controller
       ->get("request_item i")
       ->result_array();
     foreach ($itm as $key => $value) {
-      $lot = $this->db->where("stock_id", $value['stock_id'])->order_by("lot_id", "asc")->get("item_lot")->result_array();
-      $itm[$key]['lot'] = $lot;
+      $lot = $this->db->where(["stock_id" => $value['stock_id'], "qty >" => 0])->order_by("lot_id", "asc")->get("item_lot")->result_array();
+
+      $lt = 0;
+      foreach ($lot as $k => $v) {
+        if ($lt < $value['qty']) {
+          $itm[$key]['lot'][] = $v;
+        }
+        $lt += $v['qty'];
+      }
     }
 
     echo json_encode($itm);
@@ -84,7 +91,7 @@ class Outbound extends Core_Controller
       $itm[$key]['qty']         = $dat['qty'][$key];
       $itm[$key]['length']      = $dat['length'][$key];
       $itm[$key]['width']       = $dat['width'][$key];
-      $itm[$key]['lot']         = implode(",", $dat['lot'][$dat['stock_id'][$key]]);
+      $itm[$key]['lot']         = substr($dat['lot'][$key], 0, -1);
     }
 
     $this->Outbound_mod->insertItem($itm);
@@ -159,8 +166,6 @@ class Outbound extends Core_Controller
 
         foreach ($lot as $k => $v) {
           $lq -= $v['qty'];
-          echo '<pre>';
-          var_dump($lq);
           if ($lq >= 0) {
             $min = 0;
           } else {

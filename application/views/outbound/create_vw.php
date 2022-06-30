@@ -112,17 +112,20 @@
             for (let x in cale) {
               itm = cale[x];
               sel = "";
+              va = "";
               for (let i in itm.lot) {
                 l = itm.lot[i];
-                sel += "<option value='" + l.lot_id + "'>" + l.incoming + " (" + l.qty + ")</option>"
+                sel += "<li><p class = 'text-sm mb-0'>" + l.lot + " (" + l.qty + ")</p></li>"
+                va += l.lot_id + ','
               }
 
               tbody += '<tr class="text-center">\
-                  <td>\
+                  <td class="text-left">\
                     <div class="col-sm-12">\
-                      <select class="select2 selboy" name="lot[' + itm.stock_id + '][]" multiple="multiple" style=\'width:100%\'>\
-                        ' + sel + '\
-                      </select>\
+                    <input type="hidden" name="lot[]" value="' + va + '" >\
+                      <ul>\
+                      ' + sel + '\
+                      </ul>\
                     </div>\
                   </td>\
                   <td>\
