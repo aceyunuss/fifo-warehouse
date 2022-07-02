@@ -60,6 +60,7 @@
               <thead>
                 <tr>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">No. Lot</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">Waktu</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Code</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
@@ -112,10 +113,12 @@
             for (let x in cale) {
               itm = cale[x];
               sel = "";
+              selwa = "";
               va = "";
               for (let i in itm.lot) {
                 l = itm.lot[i];
                 sel += "<li><p class = 'text-sm mb-0'>" + l.lot + " (" + l.qty + ")</p></li>"
+                selwa += "<li><p class = 'text-sm mb-0'>" + l.incoming + "</p></li>"
                 va += l.lot_id + ','
               }
 
@@ -125,6 +128,13 @@
                     <input type="hidden" name="lot[]" value="' + va + '" >\
                       <ul>\
                       ' + sel + '\
+                      </ul>\
+                    </div>\
+                  </td>\
+                  <td class="text-left">\
+                    <div class="col-sm-12">\
+                      <ul>\
+                      ' + selwa + '\
                       </ul>\
                     </div>\
                   </td>\

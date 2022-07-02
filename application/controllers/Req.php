@@ -49,7 +49,7 @@ class Req extends Core_Controller
       'spb'       => $dat['spb'],
       'spb_date'  => $dat['spbdate'],
       'div'       => $dat['div'],
-      'spk'       => $dat['spk'],
+      'spk'       => 'SPK-PD-'.$dat['spk'],
       'category'  => $dat['cat'][0],
       'status_id' => 11,
       'status'    => "Mengunggu Persetujuan"
@@ -87,7 +87,8 @@ class Req extends Core_Controller
   {
     $de['req'] = $this->Req_mod->get($id)->row_array();
     $de['itm'] = $this->Req_mod->getItem("", $id)->result_array();
-    $this->template("req/reqvw_vw", "Surat Permintaan Barang", $de);
+    $te = ($this->session->userdata('position') == "Kabag Produksi") ? "Permintaan Barang"  : "Surat Permintaan Barang";
+    $this->template("req/reqvw_vw", $te, $de);
   }
   
   public function process($id)

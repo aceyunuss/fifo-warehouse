@@ -41,7 +41,7 @@
               <input type="text" maxlength="255" class="form-control" name="do" required>
             </div>
             <div class="col-sm-2">
-              <input type="date" class="form-control" name="dodate" required>
+              <input type="date" class="form-control needed" name="dodate" required>
             </div>
             <div class="col-sm-1">
             </div>
@@ -49,7 +49,7 @@
               <h6 class="mb-1 text-dark text-sm">BPB Date</h6>
             </label>
             <div class="col-sm-3">
-              <input type="date" class="form-control" name="bpbdate" required>
+              <input type="date" class="form-control needed" name="bpbdate" required>
             </div>
           </div>
 

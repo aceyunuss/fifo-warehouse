@@ -227,6 +227,20 @@
       // });
 
 
+    
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      today = yyyy + '-' + mm + '-' + dd;
+      $('.needed').attr("min", today)
+
       na = '<div class="card-body pt-4 p-3">\
             <ul class="list-group">\
               <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">\

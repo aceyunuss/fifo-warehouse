@@ -83,7 +83,8 @@ class Inbound extends Core_Controller
   {
     $de['inb'] = $this->Inbound_mod->get($id)->row_array();
     $de['itm'] = $this->Inbound_mod->getItem("", $id)->result_array();
-    $this->template("inbound/inboundvw_vw", "Bukti Penerimaan Barang", $de);
+    $te = ($this->session->userdata('position') == "Admin Gudang") ? " Barang Masuk" : " Bukti Penerimaan Barang";
+    $this->template("inbound/inboundvw_vw", $te, $de);
   }
 
 

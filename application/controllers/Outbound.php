@@ -120,8 +120,8 @@ class Outbound extends Core_Controller
 
       $de['itm'][$key]['lot'] = implode(", ", $lot);
     }
-
-    $this->template("outbound/outboundvw_vw", "Serah Terima Barang", $de);
+    $te = ($this->session->userdata('position') == "Admin Gudang") ? " Barang Keluar"  : " Terima Barang";
+    $this->template("outbound/outboundvw_vw", $te, $de);
   }
 
   public function process($id)

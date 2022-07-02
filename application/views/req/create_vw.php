@@ -33,14 +33,17 @@
               <h6 class="mb-1 text-dark text-sm">SPB Date</h6>
             </label>
             <div class="col-sm-3">
-              <input type="date" class="form-control" name="spbdate" required>
+              <input type="date" class="form-control needed" name="spbdate" required>
             </div>
             <div class="col-sm-1">
             </div>
             <label class="col-sm-2 col-form-label">
               <h6 class="mb-1 text-dark text-sm">SPK No</h6>
             </label>
-            <div class="col-sm-3">
+            <label class="col-sm-1 col-form-label">
+              <p class="mb-1 text-dark text-sm">SPK-PD</p>
+            </label>
+            <div class="col-sm-2">
               <input type="text" maxlength="255" class="form-control" name="spk" required>
             </div>
           </div>

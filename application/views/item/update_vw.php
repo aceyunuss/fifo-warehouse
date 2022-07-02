@@ -44,7 +44,7 @@
           </div>
           <div class="form-group row">
             <label class="col-sm-2 form-label">
-              <h6 class="mb-1 text-dark text-sm">Lebar (cm)</h6>
+              <h6 class="mb-1 text-dark text-sm">Lebar</h6>
             </label>
             <div class="col-sm-6">
               <p class="form-control-static"><?= $itm['wd'] ?> cm</p>
@@ -52,7 +52,7 @@
           </div>
           <div class="form-group row">
             <label class="col-sm-2 form-label">
-              <h6 class="mb-1 text-dark text-sm">Panjang (cm)</h6>
+              <h6 class="mb-1 text-dark text-sm">Panjang</h6>
             </label>
             <div class="col-sm-6">
               <p class="form-control-static"><?= $itm['lg'] ?> cm</p>
