@@ -138,9 +138,11 @@ class Inbound extends Core_Controller
       case 'RML':
         $l = [20, 25, 30];
         $p = [5000, 10000];
+        break;
       case 'RMP':
         $l = [70, 100, 140];
         $p = [5000, 10000, 30000];
+        break;
       case 'DT':
         $l = [70, 100, 140];
         $p = [5000, 10000, 30000];
