@@ -33,7 +33,7 @@
               <h6 class="mb-1 text-dark text-sm">SPB Date</h6>
             </label>
             <div class="col-sm-3">
-              <p class="form-static"><?= substr($req['spb_date'], 0, 10) ?></p>
+              <p class="form-static"><?= $req['spb_date'] ?></p>
             </div>
             <div class="col-sm-1">
             </div>

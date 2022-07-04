@@ -32,10 +32,10 @@
                     <p class="text-sm mb-0"><?= $value['supp_name'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= substr($value['bpb_date'], 0, 10) ?></p>
+                    <p class="text-sm mb-0"><?= $value['bpb_date'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= substr($value['do_date'], 0, 10) ?></p>
+                    <p class="text-sm mb-0"><?= $value['do_date'] ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['po'] ?></p>

@@ -103,7 +103,7 @@ class Outbound extends Core_Controller
       $this->db->trans_rollback();
       $msg = "Gagal";
     }
-    echo "<script>alert('$msg menginput data'); location.href='" . site_url('outbound') . "';</script>";
+    echo "<script>alert('$msg menginput data'); location.href='" . site_url() . "';</script>";
   }
 
 
@@ -187,6 +187,6 @@ class Outbound extends Core_Controller
       $this->db->trans_rollback();
       $msg = "Gagal";
     }
-    echo "<script>alert('$msg memproses data'); location.href='" . site_url('outbound') . "';</script>";
+    echo "<script>alert('$msg memproses data'); location.href='" . site_url() . "';</script>";
   }
 }

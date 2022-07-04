@@ -75,7 +75,7 @@ class Inbound extends Core_Controller
       $this->db->trans_rollback();
       $msg = "Gagal";
     }
-    echo "<script>alert('$msg menginput data'); location.href='" . site_url('inbound') . "';</script>";
+    echo "<script>alert('$msg menginput data'); location.href='" . site_url() . "';</script>";
   }
 
 
@@ -124,7 +124,7 @@ class Inbound extends Core_Controller
       $this->db->trans_rollback();
       $msg = "Gagal";
     }
-    echo "<script>alert('$msg memproses data'); location.href='" . site_url('inbound') . "';</script>";
+    echo "<script>alert('$msg memproses data'); location.href='" . site_url() . "';</script>";
   }
 
 

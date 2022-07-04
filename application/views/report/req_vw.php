@@ -30,7 +30,7 @@
                     <p class="text-sm mb-0"><?= $value['spk'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= substr($value['spb_date'], 0, 10) ?></p>
+                    <p class="text-sm mb-0"><?= $value['spb_date'] ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['status'] ?></p>

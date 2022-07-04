@@ -79,7 +79,7 @@ class Req extends Core_Controller
       $this->db->trans_rollback();
       $msg = "Gagal";
     }
-    echo "<script>alert('$msg menginput data'); location.href='" . site_url('req') . "';</script>";
+    echo "<script>alert('$msg menginput data'); location.href='" . site_url() . "';</script>";
   }
 
   
@@ -121,7 +121,7 @@ class Req extends Core_Controller
       $this->db->trans_rollback();
       $msg = "Gagal";
     }
-    echo "<script>alert('$msg memproses data'); location.href='" . site_url('req') . "';</script>";
+    echo "<script>alert('$msg memproses data'); location.href='" . site_url() . "';</script>";
   }
 
 }

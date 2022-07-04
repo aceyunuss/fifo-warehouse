@@ -36,7 +36,7 @@
               <p class="form-control-static"><?= $inb['do'] ?></p>
             </div>
             <div class="col-sm-2">
-              <p class="form-control-static"><?= substr($inb['do_date'], 0, 10) ?></p>
+              <p class="form-control-static"><?= $inb['do_date'] ?></p>
             </div>
             <div class="col-sm-1">
             </div>
@@ -44,7 +44,7 @@
               <h6 class="mb-1 text-dark text-sm">BPB Date</h6>
             </label>
             <div class="col-sm-3">
-              <p class="form-control-static"><?= substr($inb['bpb_date'], 0, 10) ?></p>
+              <p class="form-control-static"><?= $inb['bpb_date'] ?></p>
             </div>
           </div>
 

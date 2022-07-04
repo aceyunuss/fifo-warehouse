@@ -33,7 +33,7 @@
               <h6 class="mb-1 text-dark text-sm">SPB Date</h6>
             </label>
             <div class="col-sm-3">
-              <input type="date" class="form-control needed" name="spbdate" required>
+              <input type="datetime-local" class="form-control needed" name="spbdate" required>
             </div>
             <div class="col-sm-1">
             </div>
