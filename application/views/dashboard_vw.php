@@ -107,7 +107,7 @@ if ($this->session->userdata('position') == "Admin Gudang") { ?>
               <div class="d-flex flex-column">
                 <h6 class="mb-3 text-sm"><?= $value['typ'] ?></h6>
                 <span class="mb-2 text-xs">No &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-dark font-weight-bold ms-sm-2"><?= $value['no'] ?></span></span>
-                <span class="mb-2 text-xs">Tanggal <span class="text-dark ms-sm-2 font-weight-bold"><?= substr($value['dt'], 0, 10) ?></span></span>
+                <span class="mb-2 text-xs">Tanggal <span class="text-dark ms-sm-2 font-weight-bold"><?= $value['dt'] ?></span></span>
               </div>
               <div class="ms-auto text-end">
                 <a class="btn bg-gradient-primary active" href="<?= site_url($value['lk']) ?>">Proses</a>
