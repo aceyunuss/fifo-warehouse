@@ -19,6 +19,10 @@ class Req extends Core_Controller
   {
     $this->db->where('status !=', "Selesai");
     $data['logs'] = $this->Req_mod->get()->result_array();
+
+    $this->db->where("status", "Selesai");
+    $data['req'] = $this->Req_mod->get()->result_array();
+
     $this->template("req/reqlist_vw", "Permintaan Barang", $data);
   }
 
@@ -49,7 +53,7 @@ class Req extends Core_Controller
       'spb'       => $dat['spb'],
       'spb_date'  => $dat['spbdate'],
       'div'       => $dat['div'],
-      'spk'       => 'SPK-PD-'.$dat['spk'],
+      'spk'       => 'SPK-PD-' . $dat['spk'],
       'category'  => $dat['cat'][0],
       'status_id' => 11,
       'status'    => "Mengunggu Persetujuan"
@@ -82,7 +86,7 @@ class Req extends Core_Controller
     echo "<script>alert('$msg menginput data'); location.href='" . site_url() . "';</script>";
   }
 
-  
+
   public function view($id)
   {
     $de['req'] = $this->Req_mod->get($id)->row_array();
@@ -90,7 +94,7 @@ class Req extends Core_Controller
     $te = ($this->session->userdata('position') == "Kabag Produksi") ? "Permintaan Barang"  : "Surat Permintaan Barang";
     $this->template("req/reqvw_vw", $te, $de);
   }
-  
+
   public function process($id)
   {
     $de['req'] = $this->Req_mod->get($id)->row_array();
@@ -105,7 +109,7 @@ class Req extends Core_Controller
 
     $p = $this->session->userdata('position');
     $id = $this->input->post('id');
-    
+
     if ($p == "Admin Gudang") {
       $data['status_id'] = 12;
       $data['status'] = "Selesai";
@@ -123,5 +127,4 @@ class Req extends Core_Controller
     }
     echo "<script>alert('$msg memproses data'); location.href='" . site_url() . "';</script>";
   }
-
 }
