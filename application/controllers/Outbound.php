@@ -19,6 +19,11 @@ class Outbound extends Core_Controller
   {
     $this->db->where('status !=', "Selesai");
     $data['logs'] = $this->Outbound_mod->get()->result_array();
+
+    
+    $this->db->where("status", "Selesai");
+    $data['out'] = $this->Outbound_mod->get()->result_array();
+
     $this->template("outbound/outboundlist_vw", "Barang Keluar", $data);
   }
 
