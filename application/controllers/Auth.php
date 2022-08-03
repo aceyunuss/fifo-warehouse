@@ -14,13 +14,50 @@ class Auth extends Core_Controller
   public function index()
   {
     if ($this->session->userdata('status') == 'granted') {
-      $this->load->model(['User_mod', 'Item_mod', 'Inbound_mod', 'Outbound_mod']);
+      $this->load->model(['User_mod', 'Item_mod', 'Inbound_mod', 'Outbound_mod', 'Spk_mod', 'Pr_mod', 'Req_mod']);
 
       $data['todo'] = $this->Mst_mod->getTodo()->result_array();
       $data['supp'] = $this->Mst_mod->getSupp()->num_rows();
       $data['item'] = $this->Item_mod->getStock()->num_rows();
       $data['inb'] = $this->Inbound_mod->get()->num_rows();
-      $data['out'] = $this->Outbound_mod->get()->num_rows();
+      $data['outs'] = $this->Outbound_mod->get()->num_rows();
+
+
+      $pos = $this->session->userdata('position');
+
+      switch ($pos) {
+        case 'Admin Gudang':
+          $data['whodas'] = 'wh';
+          break;
+        case 'PPIC':
+          $data['whodas'] = 'ppic';
+          break;
+        case 'Purchase':
+          $data['whodas'] = 'prc';
+          break;
+        case 'Kabag Produksi':
+          $data['whodas'] = 'prd';
+          break;
+      }
+
+
+      $this->db->where('status !=', "Selesai");
+      $data['intodo'] = $this->Inbound_mod->get()->result_array();
+
+      $this->db->where("status", "Selesai");
+      $data['in'] = $this->Inbound_mod->get()->result_array();
+
+      $this->db->where("status", "Selesai");
+      $data['out'] = $this->Outbound_mod->get()->result_array();
+
+      $this->db->where("status", "Selesai");
+      $data['req'] = $this->Req_mod->get()->result_array();
+
+      $this->db->where("status", "Selesai");
+      $data['spk'] = $this->Spk_mod->get()->result_array();
+
+      $this->db->where("status", "Selesai");
+      $data['pr'] = $this->Pr_mod->get()->result_array();
 
       $this->template('dashboard_vw', "Dashboard", $data);
     } else {
