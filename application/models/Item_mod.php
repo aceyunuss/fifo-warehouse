@@ -27,6 +27,28 @@ class Item_mod extends CI_Model
   }
 
 
+  public function getSTockLot($id = "")
+  {
+    if (!empty($id)) {
+      $this->db->where("stock_id", $id);
+    }
+    $this->db->join("item_stock", "item_stock.stock_id=item_lot.stock_id", "left");
+    // $this->db->join("supplier", "supplier.id=item_stock.supplier_id", "left");
+    return $this->db->get("item_lot");
+  }
+
+
+  public function getItem($id = "")
+  {
+    $this->db->select("item.*, supp_name");
+    if (!empty($id)) {
+      $this->db->where("item.id", $id);
+    }
+    $this->db->join("supplier", "supplier.id=item.supplier_id", "left");
+    return $this->db->get("item");
+  }
+
+  
   public function updateLot($id, $data)
   {
     $this->db->where('lot_id', $id)->update("item_lot", $data);

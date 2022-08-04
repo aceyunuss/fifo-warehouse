@@ -53,6 +53,9 @@ class Auth extends Core_Controller
       $this->db->where("status", "Selesai");
       $data['req'] = $this->Req_mod->get()->result_array();
 
+      $this->db->where("status !=", "Selesai");
+      $data['spktodo'] = $this->Spk_mod->get()->result_array();
+
       $this->db->where("status", "Selesai");
       $data['spk'] = $this->Spk_mod->get()->result_array();
 

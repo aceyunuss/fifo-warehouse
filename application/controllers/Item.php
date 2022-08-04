@@ -17,7 +17,7 @@ class Item extends Core_Controller
 
   public function index()
   {
-    $data['item'] = $this->Item_mod->getStock()->result_array();
+    $data['item'] = $this->Item_mod->getItem()->result_array();
     $this->template("item/itemlist_vw", "Stok Barang", $data);
   }
 
@@ -47,5 +47,14 @@ class Item extends Core_Controller
       $msg = "Gagal";
     }
     echo "<script>alert('$msg mengupdate stok'); location.href='" . site_url('item') . "';</script>";
+  }
+
+
+  public function get_item()
+  {
+    $cat = $this->input->post('cat');
+    $this->db->where('cat', $cat);
+    $item = $this->Item_mod->getItem()->result_array();
+    echo json_encode($item);
   }
 }
