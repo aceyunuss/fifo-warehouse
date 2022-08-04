@@ -14,7 +14,7 @@ class Auth extends Core_Controller
   public function index()
   {
     if ($this->session->userdata('status') == 'granted') {
-      $this->load->model(['User_mod', 'Item_mod', 'Inbound_mod', 'Outbound_mod', 'Spk_mod', 'Pr_mod', 'Req_mod']);
+      $this->load->model(['User_mod', 'Item_mod', 'Inbound_mod', 'Outbound_mod', 'Spk_mod', 'Pr_mod', 'Req_mod', 'Po_mod']);
 
       $data['todo'] = $this->Mst_mod->getTodo()->result_array();
       $data['supp'] = $this->Mst_mod->getSupp()->num_rows();
@@ -50,6 +50,9 @@ class Auth extends Core_Controller
       $this->db->where("status", "Selesai");
       $data['out'] = $this->Outbound_mod->get()->result_array();
 
+      $this->db->where("status !=", "Selesai");
+      $data['reqtodo'] = $this->Req_mod->get()->result_array();
+
       $this->db->where("status", "Selesai");
       $data['req'] = $this->Req_mod->get()->result_array();
 
@@ -64,6 +67,12 @@ class Auth extends Core_Controller
 
       $this->db->where("status", "Selesai");
       $data['pr'] = $this->Pr_mod->get()->result_array();
+
+      $this->db->where("status !=", "Selesai");
+      $data['potodo'] = $this->Po_mod->get()->result_array();
+
+      $this->db->where("status", "Selesai");
+      $data['po'] = $this->Po_mod->get()->result_array();
 
       $this->template('dashboard_vw', "Dashboard", $data);
     } else {

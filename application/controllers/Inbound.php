@@ -20,7 +20,7 @@ class Inbound extends Core_Controller
     $this->db->where('status !=', "Selesai");
     $data['logs'] = $this->Inbound_mod->get()->result_array();
 
-    
+
     $this->db->where("status", "Selesai");
     $data['in'] = $this->Inbound_mod->get()->result_array();
     $this->template("inbound/inboundlist_vw", "Barang Masuk", $data);
@@ -49,26 +49,40 @@ class Inbound extends Core_Controller
       'do'      => $dat['do'],
       'bpb'     => $dat['bpb'],
       'bpb_date' => $dat['bpbdate'],
-      'note'    => $dat['note'],
+      // 'note'    => $dat['note'],
       'status_id' => 1,
       'status'  => "Menunggu Persetujuan"
     ];
 
     $in = $this->Inbound_mod->insert($inp);
+    $this->load->model('Po_mod');
+    foreach ($dat['acc'] as $key => $value) {
+      $gi = $this->Po_mod->getItem($key)->row_array();
 
-    foreach ($dat['item_id'] as $key => $value) {
-      $gi = $this->Mst_mod->getItem($dat['item_id'][$key])->row_array();
-
+      // $itm[$key]['item_id']     = $dat['item_id'][$key];
       $itm[$key]['inbound_id']  = $in;
-      $itm[$key]['item_id']     = $dat['item_id'][$key];
-      $itm[$key]['name']        = $gi['name'];
+      $itm[$key]['name']        = $gi['item_name'];
       $itm[$key]['description'] = $gi['description'];
-      $itm[$key]['category']    = $dat['cat'][$key];
-      $itm[$key]['qty']         = $dat['qty'][$key];
-      $itm[$key]['length']      = $dat['length'][$key];
-      $itm[$key]['width']       = $dat['width'][$key];
-      $itm[$key]['incoming']    = $dat['time'][$key];
+      // $itm[$key]['category']    = $dat['cat'][$key];
+      $itm[$key]['qty']         = $gi['qty'];
+      $itm[$key]['width']       = $gi['width'];
+      $itm[$key]['length']      = $gi['length'];
+      $itm[$key]['incoming']    = date('Y-m-d H:i:s');
     }
+
+    // foreach ($dat['item_id'] as $key => $value) {
+    //   $gi = $this->Mst_mod->getItem($dat['item_id'][$key])->row_array();
+
+    //   $itm[$key]['inbound_id']  = $in;
+    //   $itm[$key]['item_id']     = $dat['item_id'][$key];
+    //   $itm[$key]['name']        = $gi['name'];
+    //   $itm[$key]['description'] = $gi['description'];
+    //   $itm[$key]['category']    = $dat['cat'][$key];
+    //   $itm[$key]['qty']         = $dat['qty'][$key];
+    //   $itm[$key]['length']      = $dat['length'][$key];
+    //   $itm[$key]['width']       = $dat['width'][$key];
+    //   $itm[$key]['incoming']    = $dat['time'][$key];
+    // }
 
     $this->Inbound_mod->insertItem($itm);
 
@@ -115,8 +129,11 @@ class Inbound extends Core_Controller
       $data['status_id'] = 3;
       $data['status'] = "Selesai";
 
-      $this->Inbound_mod->insertLot($id);
+      $this->Inbound_mod->updateItem($id);
+      // die;
+      // $this->Inbound_mod->insertLot($id);
     }
+    
     if (isset($data)) {
       $this->Inbound_mod->update($id, $data);
     }
@@ -156,5 +173,19 @@ class Inbound extends Core_Controller
     $re['sz'] = ['le' => $p, 'wi' => $l];
 
     echo json_encode($re);
+  }
+
+
+  public function get_po()
+  {
+    $this->load->model("Po_mod");
+    $po = $this->input->post('po');
+    $this->db->where(['po' => $po, 'status_id' => 82]);
+
+    $this->db->select("po.po, po_item.*");
+    $this->db->join("po", "po.id=po_item.po_id", "left");
+    $item = $this->Po_mod->getItem()->result_array();
+
+    echo json_encode($item);
   }
 }

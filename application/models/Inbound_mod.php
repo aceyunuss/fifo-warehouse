@@ -80,6 +80,24 @@ class Inbound_mod extends CI_Model
       ->row_array();
   }
 
+
+
+  public function updateItem($id)
+  {
+    $itm = $this->getItem("", $id)->result_array();
+    foreach ($itm as $key => $value) {
+      $this->db->where(['description' => $value['description'], 'name' => $value['name'], 'length' => $value['length'], 'width' => $value['width']]);
+      $i = $this->db->select("act")->get("item")->row_array();
+
+      $this->db->where(['description' => $value['description'], 'name' => $value['name'], 'length' => $value['length'], 'width' => $value['width']]);
+      $up = [
+        'qty' => $i['act'] + $value['qty'],
+        'act' => $i['act'] + $value['qty'],
+      ];
+      $this->db->update("item", $up);
+    }
+  }
+
   public function insertLot($id)
   {
     $itm = $this->getItem("", $id)->result_array();

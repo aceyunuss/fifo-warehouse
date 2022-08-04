@@ -4,7 +4,7 @@
       <div class="card-header pb-0">
         <div class="row">
           <div class="col-6 d-flex align-items-center">
-            <h6 class="mb-0">List Permintaan Barang</h6>
+            <h6 class="mb-0">List Surat Perintah Kerja</h6>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($reqtodo as $key => $value) { ?>
+              <?php foreach ($spktodo as $key => $value) { ?>
                 <tr class="text-center">
                   <td>
                     <p class="text-sm mb-0"><?= $value['spk'] ?></p>
@@ -44,45 +44,45 @@
   </div>
 </div>
 
-<div class="row mt-4">
+<div class="row">
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-header pb-0">
         <div class="row">
           <div class="col-6 d-flex align-items-center">
-            <h6 class="mb-0">List Penerimaan Barang</h6>
+            <h6 class="mb-0">Riwayat Surat Perintah Kerja</h6>
           </div>
         </div>
       </div>
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
-          <table id="todo_stb" class="table align-items-center mb-0">
+          <table id="hist_spk" class="table align-items-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">PO No</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">PO Date</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">PR No</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPK No</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPK Date</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($potodo as $key => $value) { ?>
+              <?php foreach ($spk as $key => $value) { ?>
                 <tr class="text-center">
                   <td>
-                    <p class="text-sm mb-0"><?= $value['po'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['spk'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['po_date'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['spk_date'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['pr'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['description'] ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['status'] ?></p>
                   </td>
                   <td>
-                    <a href="<?= site_url('po/process/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Proses</a>
+                    <a href="<?= site_url('spk/view/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Lihat</a>
                   </td>
                 </tr>
               <?php } ?>
@@ -93,6 +93,7 @@
     </div>
   </div>
 </div>
+
 
 <script>
   $(document).ready(function() {

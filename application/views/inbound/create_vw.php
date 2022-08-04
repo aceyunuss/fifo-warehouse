@@ -58,15 +58,16 @@
               <h6 class="mb-1 text-dark text-sm">PO No.</h6>
             </label>
             <div class="col-sm-3">
-              <input type="text" maxlength="255" class="form-control" name="po" required>
+              <input type="text" maxlength="255" class="form-control" id="po" name="po" required>
             </div>
             <div class="col-sm-2">
+              <a href="#" id="fnd" class="btn btn-outline-primary btn-sm mb-0">Cari</a>
             </div>
             <label class="col-sm-1 control-label">
-              <h6 class="mb-1 text-dark text-sm">Note</h6>
+              <h6 class="mb-1 text-dark text-sm">PR No</h6>
             </label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" name="note" required>
+              <input type="text" class="form-control" id="pr" name="pr" required>
             </div>
           </div>
           <br>
@@ -74,7 +75,7 @@
           <br>
 
 
-
+          <!-- 
           <div class="form-group row">
             <label class="col-sm-2 control-label">
               <h6 class="mb-1 text-dark text-sm">Category</h6>
@@ -133,15 +134,15 @@
 
           <br>
           <hr class="horizontal dark mt-0">
-          <br>
+          <br> -->
 
           <div class="table-responsive p-0">
             <table class="table align-items-center mb-0 item_table">
               <thead>
                 <tr>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">#</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Diterima</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Waktu</th>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Category</th>
+                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Category</th> -->
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
                   <th colspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Size</th>
@@ -179,37 +180,64 @@
     })
 
 
-    $('#cat').change(function() {
+    $('#fnd').click(function() {
 
-      let cat = $(this).val()
+      let po = $("#po").val()
       $.ajax({
         type: "POST",
-        url: '<?= site_url('inbound/get_item') ?>',
+        url: '<?= site_url('inbound/get_po') ?>',
         data: {
-          cat: cat,
+          po: po,
         },
         success: function(data, textStatus, jQxhr) {
           cale = JSON.parse(data)
 
-          $('#itm').html('')
-          let sel = ('<option>-- Pilih Barang --</option>');
-          let selp = ('<option>-- Pilih --</option>');
-          let sell = ('<option>-- Pilih --</option>');
+          $('.item_table tbody').empty();
+          tbody = ""
 
-          for (let x in cale.item) {
-            sel += "<option value = '" + cale.item[x].id + "'>" + cale.item[x].description + " | " + cale.item[x].name + "</option>";
-          }
-          $('#itm').html(sel)
+          let d = new Date;
+          let time = [
+            d.getFullYear(),
+            d.getMonth() + 1,
+            d.getDate(),
+          ].join('/') + ' ' + [d.getHours(),
+            d.getMinutes(),
+            d.getSeconds()
+          ].join(':');
 
-          for (let x in cale.sz.wi) {
-            selp += "<option value = '" + cale.sz.wi[x] + "'>" + cale.sz.wi[x] + "</option>";
-          }
-          $('#wi').html(selp)
 
-          for (let x in cale.sz.le) {
-            sell += "<option value = '" + cale.sz.le[x] + "'>" + cale.sz.le[x] + "</option>";
+          for (let x in cale) {
+            $("#pr").val(cale[x].pr)
+
+            tbody += '<tr class="text-center">\
+                  <td>\
+                    <input type="checkbox" name="acc[' + cale[x].id + ']" value="1">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + time + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].description + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].item_name + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].width + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].length + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].qty + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">Roll</p>\
+                  </td>\
+                </tr>'
           }
-          $('#le').html(sell)
+          $('.item_table tbody').append(tbody)
+
         },
       });
     })

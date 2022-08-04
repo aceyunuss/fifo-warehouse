@@ -129,7 +129,7 @@ class Spk extends Core_Controller
     $p = $this->session->userdata('position');
     $id = $this->input->post('id');
 
-    if ($p == "Admin Gudang") {
+    if ($p == "Kabag Produksi") {
       $data['status_id'] = 62;
       $data['status'] = "Selesai";
     }
