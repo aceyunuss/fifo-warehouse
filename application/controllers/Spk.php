@@ -7,7 +7,7 @@ class Spk extends Core_Controller
   {
     parent::__construct();
 
-    $this->load->model('Spk_mod');
+    $this->load->model(['Spk_mod', 'Item_mod']);
     if ($this->session->userdata('status') != 'granted') {
       $this->session->sess_destroy();
       redirect('auth');
@@ -30,11 +30,12 @@ class Spk extends Core_Controller
     $this->load->model("Req_mod");
     $data['spk'] = $this->Spk_mod->getNum();
     $data['cat'] = $this->Mst_mod->getCat();
+    $data['item'] = $this->Item_mod->getItem()->result_array();
 
     $this->template("spk/create_vw", "Surat Perintah Kerja", $data);
   }
 
-  
+
   public function get_stock()
   {
     $cat = $this->input->post('cat');
@@ -73,6 +74,7 @@ class Spk extends Core_Controller
 
     $itm = [];
     $dat = $this->input->post();
+
     $inp = [
       'spk'       => $dat['spk'],
       'spk_date'  => $dat['spkdate'],
@@ -81,24 +83,20 @@ class Spk extends Core_Controller
       'status'    => "Menunggu Persetujuan"
     ];
 
-    $out = $this->Spk_mod->insert($inp);
+    foreach ($dat['used'] as $key => $value) {
+      if (!empty($value)) {
+        $itm = $this->Item_mod->getItem($key)->row_array();
+        $inp['item_name'] = $itm['name'];
+        $inp['description'] = $itm['description'];
+        $inp['width'] = $itm['width'];
+        $inp['length'] = $itm['length'];
+        $inp['qty'] = $dat['needed'][$key];
+        $inp['item_code'] = $itm['code'];
+        $inp['supplier'] = $itm['supp_name'];
+      }
+    }
 
-    // foreach ($dat['stock_id'] as $key => $value) {
-
-    //   $gi = $this->Mst_mod->getStock($dat['stock_id'][$key])->row_array();
-
-    //   $itm[$key]['spk_id'] = $out;
-    //   $itm[$key]['stock_id']    = $dat['stock_id'][$key];
-    //   $itm[$key]['code']        = $gi['code'];
-    //   $itm[$key]['name']        = $gi['nm'];
-    //   $itm[$key]['description'] = $gi['dsc'];
-    //   $itm[$key]['qty']         = $dat['qty'][$key];
-    //   $itm[$key]['length']      = $dat['length'][$key];
-    //   $itm[$key]['width']       = $dat['width'][$key];
-    //   $itm[$key]['lot']         = substr($dat['lot'][$key], 0, -1);
-    // }
-
-    // $this->Spk_mod->insertItem($itm);
+    $spk = $this->Spk_mod->insert($inp);
 
     if ($this->db->trans_status() !== FALSE) {
       $this->db->trans_commit();
@@ -114,34 +112,13 @@ class Spk extends Core_Controller
   public function view($id)
   {
     $de['spk'] = $this->Spk_mod->get($id)->row_array();
-    $de['itm'] = [];//$this->Spk_mod->getItem("", $id)->result_array();
-    // foreach ($de['itm'] as $key => $value) {
-    //   $lot = [];
-    //   $l = explode(",", $value['lot']);
-    //   foreach ($l as $k => $v) {
-    //     $lot[] = $this->Mst_mod->getLot($v)->row()->lot;
-    //   }
-
-    //   $de['itm'][$key]['lot'] = implode(", ", $lot);
-    // }
-    $te = ($this->session->userdata('position') == "Admin Gudang") ? " Surat Perintah Kerja"  : " Terima Barang";
-    $this->template("spk/spkvw_vw", $te, $de);
+    $this->template("spk/spkvw_vw", "Surat Perintah Kerja", $de);
   }
 
   public function process($id)
   {
-    $de['out'] = $this->Spk_mod->get($id)->row_array();
-    $de['itm'] = $this->Spk_mod->getItem("", $id)->result_array();
-    foreach ($de['itm'] as $key => $value) {
-      $lot = [];
-      $l = explode(",", $value['lot']);
-      foreach ($l as $k => $v) {
-        $lot[] = $this->Mst_mod->getLot($v)->row()->lot;
-      }
-
-      $de['itm'][$key]['lot'] = implode(", ", $lot);
-    }
-    $this->template("spk/spkprc_vw", "Serah Terima Barang", $de);
+    $de['spk'] = $this->Spk_mod->get($id)->row_array();
+    $this->template("spk/spkprc_vw", "Surat Perintah Kerja", $de);
   }
 
 
@@ -152,32 +129,9 @@ class Spk extends Core_Controller
     $p = $this->session->userdata('position');
     $id = $this->input->post('id');
 
-    if ($p == "Kabag Produksi") {
-      $data['status_id'] = 22;
+    if ($p == "Admin Gudang") {
+      $data['status_id'] = 62;
       $data['status'] = "Selesai";
-
-      $itm = $this->Spk_mod->getItem("", $id)->result_array();
-      $arr = [];
-
-      foreach ($itm as $key => $value) {
-
-        $arr = explode(",", $value['lot']);
-        $lq = $value['qty'];
-
-        $this->db->order_by("lot_id", "asc");
-        $this->db->where_in('lot_id', $arr);
-        $lot = $this->Mst_mod->getLot()->result_array();
-
-        foreach ($lot as $k => $v) {
-          $lq -= $v['qty'];
-          if ($lq >= 0) {
-            $min = 0;
-          } else {
-            $min = abs($lq);
-          }
-          $upd = $this->db->where('lot_id', $v['lot_id'])->update("item_lot", ['qty' => $min]);
-        }
-      }
     }
 
     if (isset($data)) {

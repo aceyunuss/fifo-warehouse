@@ -25,7 +25,7 @@
               <h6 class="mb-1 text-dark text-sm">SPK Date</h6>
             </label>
             <div class="col-sm-3">
-              <input type="datetime-local" class="form-control spkdate" name="spkdate" spkuired>
+              <input type="date" class="form-control spkdate" name="spkdate" spkuired>
             </div>
           </div>
 
@@ -46,54 +46,28 @@
           <hr class="horizontal dark mt-0">
           <br>
 
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">
-              <h6 class="mb-1 text-dark text-sm">Item</h6>
-            </label>
-            <div class="col-sm-8">
-              <select class="form-control select2" id="itm">
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">
-              <h6 class="mb-1 text-dark text-sm">Qty</h6>
-            </label>
-            <div class="col-sm-2">
-              <input type="number" maxlength="255" class="form-control" id="qty">
-            </div>
-          </div>
-
-
-
-          <center>
-            <div class="col-sm-3">
-              <a class="btn btn-outline-primary btn-sm mb-0 add">Tambah Barang</a>
-            </div>
-          </center>
-          <br>
-          <hr class="horizontal dark mt-0">
-          <br>
 
           <div class="table-responsive p-0">
-            <table class="table align-items-center mb-0 item_table">
+            <table id="list" class="table align-items-center mb-0 item_table">
               <thead>
                 <tr>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">#</th>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Category</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Code</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Supplier</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
                   <th colspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Size</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Qty</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Pemakaian</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Kebutuhan</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">UOM</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Permintaan Pembelian</th>
                 </tr>
                 <tr>
                   <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Lebar (cm)</th>
                   <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Panjang (cm)</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="tbody">
               </tbody>
             </table>
           </div>
@@ -133,97 +107,115 @@
       let cat = $(this).val()
       $.ajax({
         type: "POST",
-        url: '<?= site_url('spk/get_stock') ?>',
+        url: '<?= site_url('item/get_item') ?>',
         data: {
           cat: cat,
         },
         success: function(data, textStatus, jQxhr) {
           cale = JSON.parse(data)
 
-          $('#itm').html('')
-          let sel = ('<option>-- Pilih Barang --</option>');
+          $(".tbody").empty();
+          let tbody = ""
           for (let x in cale) {
-            sel += "<option value = '" + cale[x].stock_id + "'>" + cale[x].dsc + " | " + cale[x].nm + " | " + cale[x].wd + " x " + cale[x].lg + "</option>";
+            lot = cale[x].lot == null ? "" : cale[x].lot;
+            tbody += `<tr class="text-center">
+                        <td>
+                          <p class="text-sm mb-0">` + lot + `</p>
+                        </td>
+                        <td>
+                          <p class="text-sm mb-0">` + cale[x].supp_name + `</p>
+                        </td>
+                        <td>
+                          <p class="text-sm mb-0">` + cale[x].description + `</p>
+                        </td>
+                        <td>
+                          <p class="text-sm mb-0">` + cale[x].name + `</p>
+                        </td>
+                        <td>
+                          <p class="text-sm mb-0">` + cale[x].width + `</p>
+                        </td>
+                        <td>
+                          <p class="text-sm mb-0">` + cale[x].length + `</p>
+                        </td>
+                        <td>
+                          <p class="text-sm mb-0">` + cale[x].qty + `</p>
+                        </td>
+                        <td>
+                          <input type="checkbox" class="used" value="1" name="used[` + cale[x].id + `]">
+                        </td>
+                        <td>
+                          <input style="width: 50px;" type="number" min="0"name="needed[` + cale[x].id + `]">
+                        </td>
+                        <td>
+                          <p class="text-sm mb-0">ROLL</p>
+                        </td>
+                        <td>
+                          <p class="text-sm mb-0">3</p>
+                        </td>
+                      </tr>`
           }
-          $('#itm').html(sel)
+
+          $('.item_table tbody').append(tbody)
+
+
         },
       });
     })
 
-    $('.add').click(function() {
-      let counter = $('.item_table tr').length + 1;
-      let stock_id = $('#itm').val()
-      let item = $('#itm option:selected').text()
-      let desc = item.split('|')[0]
-      let name = item.split('|')[1]
-      let cat = $('#cat').val()
-      let qty = $('#qty').val()
-      let size = item.split('|')[2]
-      let le = size.split('x')[0]
-      let wi = size.split('x')[1]
-
-      if (stock_id == "" || cat == "" || qty == "" || le == "" || wi == "") {
-
-        alert("Form item harus dilelngkapi")
-
-      } else {
-
-        tbody = '<tr class="text-center">\
-                  <td>\
-                    <i class="fa fa-trash text-danger remove"></i>\
-                    <input type="hidden" value="' + stock_id + '" name="stock_id[]">\
-                  </td>\
-                  <td>\
-                    <p class="text-sm mb-0">' + cat + '</p>\
-                    <input type="hidden" value="' + cat + '" name="cat[]">\
-                  </td>\
-                  <td>\
-                    <p class="text-sm mb-0">' + desc + '</p>\
-                  </td>\
-                  <td>\
-                    <p class="text-sm mb-0">' + name + '</p>\
-                  </td>\
-                  <td>\
-                    <p class="text-sm mb-0">' + le + '</p>\
-                    <input type="hidden" value="' + le + '" name="length[]">\
-                  </td>\
-                  <td>\
-                    <p class="text-sm mb-0">' + wi + '</p>\
-                    <input type="hidden" value="' + wi + '" name="width[]">\
-                  </td>\
-                  <td>\
-                    <p class="text-sm mb-0">' + qty + '</p>\
-                    <input type="hidden" value="' + qty + '" name="qty[]">\
-                  </td>\
-                  <td>\
-                    <p class="text-sm mb-0">Roll</p>\
-                  </td>\
-                </tr>'
-
-        $('.item_table tbody').append(tbody)
-
-        $('#itm').val('')
-        $('#qty').val('')
-        $('#itm').trigger('change')
-
-      }
-    })
   })
 
+  $(document).on('submit', "#submitform", function(e) {
 
-  $(document).on('click', '.remove', function() {
-    if (confirm("Are you sure delete this item?")) {
-      $(this).parent().parent().remove();
+    va = 0;
+    $('input:checkbox.used').each(function() {
+      tv = (this.checked ? $(this).val() : 0);
+      va = parseInt(tv) + parseInt(va);
+    });
+
+    if (va != 1) {
+      e.preventDefault();
+      alert("Harap pilih hanya satu barang")
     }
+
   })
+</script>
 
 
-  // $("#submitform").submit(function(e) {
+<script>
+  $(document).ready(function() {
 
-  //   if ($('.item_table tr').length == 2) {
-  //     alert("List barang tidak boleh kosong")
-  //   }
+    na = '<div class="card-body pt-4 p-3">\
+        <ul class="list-group">\
+          <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">\
+            <div class="d-flex flex-column">\
+              <div id="navlist"></div>\
+            </div>\
+          </li>\
+        </ul>\
+      </div>';
 
+    $('#list').after(na);
+    var rowsShown = 10;
+    var rowsTotal = $('#list tbody tr').length;
+    var numPages = rowsTotal / rowsShown;
+    for (i = 0; i < numPages; i++) {
+      var pageNum = i + 1;
+      $('#navlist').append('<a  class="btn bg-gradient-primary" href="#" rel="' + i + '">' + pageNum + '</a> ');
+    }
+    $('#list tbody tr').hide();
+    $('#list tbody tr').slice(0, rowsShown).show();
+    $('#navlist a:first').addClass('active');
+    $('#navlist a').bind('click', function() {
 
-  // })
+      $('#navlist a').removeClass('active');
+      $(this).addClass('active');
+      var currPage = $(this).attr('rel');
+      var startItem = currPage * rowsShown;
+      var endItem = startItem + rowsShown;
+      $('#list tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+      css('display', 'table-row').animate({
+        opacity: 1
+      }, 300);
+    });
+  });
 </script>

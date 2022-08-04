@@ -180,8 +180,8 @@
         </a>
       </li>
 
-      <!-- <li class="nav-item">
-        <a class="nav-link  " href="<?= site_url('report') ?>">
+      <li class="nav-item">
+        <a class="nav-link  " href="<?= site_url('po') ?>">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>document</title>
@@ -197,9 +197,9 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Laporan</span>
+          <span class="nav-link-text ms-1">Pesanan Pembelian</span>
         </a>
-      </li> -->
+      </li>
     </ul>
   </div>
 </aside>
@@ -207,17 +207,17 @@
 <script>
   let pos = "<?= $this->session->userdata('position') ?>"
   switch (pos) {
-    case "Admin Gudang":
-      $('.rp, .pr, .spk').hide();
-      break;
-    case "PPIC":
-      $('.rp, .rg').hide();
-      break;
-    case "Purchase":
-      $('.rp, .rg, .pr, .spk').hide();
-      break;
-    case "Kabag Produksi":
-      $('.rg, .pr, .spk').hide();
-      break;
+    // case "Admin Gudang":
+    //   $('.rp, .pr, .spk').hide();
+    //   break;
+    // case "PPIC":
+    //   $('.rp, .rg').hide();
+    //   break;
+    // case "Purchase":
+    //   $('.rp, .rg, .pr, .spk').hide();
+    //   break;
+    // case "Kabag Produksi":
+    //   $('.rg, .pr, .spk').hide();
+    break;
   }
 </script>
