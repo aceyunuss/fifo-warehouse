@@ -40,15 +40,15 @@
             <label class="col-sm-2 col-form-label">
               <h6 class="mb-1 text-dark text-sm">SPK No</h6>
             </label>
-            <label class="col-sm-1 col-form-label">
-              <p class="mb-1 text-dark text-sm">SPK-PD</p>
-            </label>
             <div class="col-sm-2">
-              <input type="text" maxlength="255" class="form-control" name="spk" required>
+              <input type="text" maxlength="255" class="form-control" id="spk" name="spk" required>
+            </div>
+            <div class="col-sm-1">
+              <a class="btn btn-outline-primary btn-sm mb-0" id="fnd">Cari</a>
             </div>
           </div>
 
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <div class="col-sm-6">
             </div>
             <label class="col-sm-2 col-form-label">
@@ -92,7 +92,7 @@
             <div class="col-sm-3">
               <a class="btn btn-outline-primary btn-sm mb-0 add">Tambah Barang</a>
             </div>
-          </center>
+          </center> -->
           <br>
           <hr class="horizontal dark mt-0">
           <br>
@@ -101,8 +101,7 @@
             <table class="table align-items-center mb-0 item_table">
               <thead>
                 <tr>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">#</th>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Category</th>
+                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Category</th> -->
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
                   <th colspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Size</th>
@@ -133,23 +132,43 @@
 
 <script>
   $(document).ready(function() {
-    $('#cat').change(function() {
-      let cat = $(this).val()
+    $('#fnd').click(function() {
+      let spk = $("#spk").val()
       $.ajax({
         type: "POST",
-        url: '<?= site_url('req/get_stock') ?>',
+        url: '<?= site_url('req/get_spk') ?>',
         data: {
-          cat: cat,
+          spk: spk,
         },
         success: function(data, textStatus, jQxhr) {
           cale = JSON.parse(data)
-
-          $('#itm').html('')
-          let sel = ('<option>-- Pilih Barang --</option>');
+          $('.item_table tbody').empty();
+          tbody = ""
           for (let x in cale) {
-            sel += "<option value = '" + cale[x].stock_id + "'>" + cale[x].dsc + " | " + cale[x].nm + " | " + cale[x].wd + " x " + cale[x].lg + "</option>";
+            tbody += '<tr class="text-center">\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].description + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].item_name + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].width + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].length + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + cale[x].qty + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">Roll</p>\
+                  </td>\
+                </tr>'
+
           }
-          $('#itm').html(sel)
+          $('.item_table tbody').append(tbody)
+
         },
       });
     })
@@ -223,7 +242,7 @@
 
 
   $("#submitform").submit(function(e) {
-    
+
     if ($('.item_table tr').length == 2) {
       alert("List barang tidak boleh kosong")
     }

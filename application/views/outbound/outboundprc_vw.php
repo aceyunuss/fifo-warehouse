@@ -55,8 +55,8 @@
             <table class="table align-items-center mb-0 item_table">
               <thead>
                 <tr>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">No. Lot</th>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Code</th>
+                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">No. Lot</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Code</th> -->
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
                   <th colspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Size</th>
@@ -71,12 +71,12 @@
               <tbody>
                 <?php foreach ((array)$itm as $key => $value) { ?>
                   <tr class="text-center">
-                    <td>
+                    <!-- <td>
                       <p class="text-sm mb-0"><?= $value['lot'] ?></p>
                     </td>
                     <td>
                       <p class="text-sm mb-0"><?= $value['code'] ?></p>
-                    </td>
+                    </td> -->
                     <td>
                       <p class="text-sm mb-0"><?= $value['description'] ?></p>
                     </td>

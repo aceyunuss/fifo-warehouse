@@ -53,27 +53,42 @@ class Req extends Core_Controller
       'spb'       => $dat['spb'],
       'spb_date'  => $dat['spbdate'],
       'div'       => $dat['div'],
-      'spk'       => 'SPK-PD-' . $dat['spk'],
-      'category'  => $dat['cat'][0],
+      'spk'       => $dat['spk'],
+      // 'category'  => $dat['cat'][0],
       'status_id' => 11,
       'status'    => "Mengunggu Persetujuan"
     ];
 
     $in = $this->Req_mod->insert($inp);
 
-    foreach ($dat['stock_id'] as $key => $value) {
-      $gi = $this->Mst_mod->getStock($dat['stock_id'][$key])->row_array();
+    $this->load->model('Spk_mod');
 
-      $itm[$key]['req_id']      = $in;
-      $itm[$key]['stock_id']     = $dat['stock_id'][$key];
-      $itm[$key]['name']        = $gi['nm'];
-      $itm[$key]['description'] = $gi['dsc'];
-      $itm[$key]['category']    = $dat['cat'][$key];
-      $itm[$key]['qty']         = $dat['qty'][$key];
-      $itm[$key]['length']      = $dat['length'][$key];
-      $itm[$key]['width']       = $dat['width'][$key];
-    }
+    $this->db->where('spk', $dat['spk']);
+    $gi = $this->Spk_mod->get()->row_array();
 
+    $itm[0]['req_id']      = $in;
+    // $itm[0]['stock_id']     = $dat['stock_id'][$key];
+    $itm[0]['name']        = $gi['item_name'];
+    $itm[0]['description'] = $gi['description'];
+    $itm[0]['qty']         = $gi['qty'];
+    $itm[0]['length']      = $gi['length'];
+    $itm[0]['width']       = $gi['width'];
+
+    // foreach ($dat['stock_id'] as $key => $value) {
+    //   $gi = $this->Mst_mod->getStock($dat['stock_id'][$key])->row_array();
+
+    //   $itm[$key]['req_id']      = $in;
+    //   $itm[$key]['stock_id']     = $dat['stock_id'][$key];
+    //   $itm[$key]['name']        = $gi['nm'];
+    //   $itm[$key]['description'] = $gi['dsc'];
+    //   $itm[$key]['category']    = $dat['cat'][$key];
+    //   $itm[$key]['qty']         = $dat['qty'][$key];
+    //   $itm[$key]['length']      = $dat['length'][$key];
+    //   $itm[$key]['width']       = $dat['width'][$key];
+    // }
+// echo '<pre>';
+// var_dump($itm);
+// die();
     $this->Req_mod->insertItem($itm);
 
     if ($this->db->trans_status() !== FALSE) {
@@ -126,5 +141,15 @@ class Req extends Core_Controller
       $msg = "Gagal";
     }
     echo "<script>alert('$msg memproses data'); location.href='" . site_url() . "';</script>";
+  }
+
+
+  public function get_spk()
+  {
+    $this->load->model("Spk_mod");
+    $spk = $this->input->post('spk');
+    $this->db->where(['spk' => $spk,  'status_id' => 62]);
+    $spk = $this->Spk_mod->get()->result_array();
+    echo json_encode($spk);
   }
 }

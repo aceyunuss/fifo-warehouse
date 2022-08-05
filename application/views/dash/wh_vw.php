@@ -13,9 +13,9 @@
           <table id="todo_spk" class="table align-items-center mb-0">
             <thead>
               <tr>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPB No</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPK No</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPK Date</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPB Date</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
             </thead>
@@ -23,16 +23,17 @@
               <?php foreach ($reqtodo as $key => $value) { ?>
                 <tr class="text-center">
                   <td>
+                    <p class="text-sm mb-0"><?= $value['spb'] ?></p>
+                  </td>
+                  <td>
                     <p class="text-sm mb-0"><?= $value['spk'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['spk_date'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['spb_date'] ?></p>
+
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['status'] ?></p>
-                  </td>
-                  <td>
-                    <a href="<?= site_url('spk/process/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Proses</a>
+                    <a href="<?= site_url('req/process/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Proses</a>
                   </td>
                 </tr>
               <?php } ?>

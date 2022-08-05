@@ -59,9 +59,9 @@
             <table class="table align-items-center mb-0 item_table">
               <thead>
                 <tr>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">No. Lot</th>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">Waktu</th>
-                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Code</th>
+                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">No. Lot</th> -->
+                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">Waktu</th> -->
+                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Code</th> -->
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
                   <th colspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Size</th>
@@ -99,7 +99,7 @@
       if (spb != "") {
         $.ajax({
           type: "POST",
-          url: '<?= site_url('outbound/get_spb') ?>',
+          url: '<?= site_url('outbound/get_spbb') ?>',
           data: {
             spb: spb,
           },
@@ -112,53 +112,22 @@
 
             for (let x in cale) {
               itm = cale[x];
-              sel = "";
-              selwa = "";
-              va = "";
-              for (let i in itm.lot) {
-                l = itm.lot[i];
-                sel += "<li><p class = 'text-sm mb-0'>" + l.lot + " (" + l.qty + ")</p></li>"
-                selwa += "<li><p class = 'text-sm mb-0'>" + l.incoming + "</p></li>"
-                va += l.lot_id + ','
-              }
 
               tbody += '<tr class="text-center">\
-                  <td class="text-left">\
-                    <div class="col-sm-12">\
-                    <input type="hidden" name="lot[]" value="' + va + '" >\
-                      <ul>\
-                      ' + sel + '\
-                      </ul>\
-                    </div>\
-                  </td>\
-                  <td class="text-left">\
-                    <div class="col-sm-12">\
-                      <ul>\
-                      ' + selwa + '\
-                      </ul>\
-                    </div>\
-                  </td>\
-                  <td>\
-                    <p class="text-sm mb-0">' + itm.code + '</p>\
-                  </td>\
                   <td>\
                     <p class="text-sm mb-0">' + itm.description + '</p>\
-                    <input type="hidden" value="' + itm.stock_id + '" name="stock_id[]">\
                   </td>\
                   <td>\
-                    <p class="text-sm mb-0">' + itm.name + '</p>\
-                  </td>\
-                  <td>\
-                    <p class="text-sm mb-0">' + itm.length + '</p>\
-                    <input type="hidden" value="' + itm.length + '" name="length[]">\
+                    <p class="text-sm mb-0">' + itm.item_name + '</p>\
                   </td>\
                   <td>\
                     <p class="text-sm mb-0">' + itm.width + '</p>\
-                    <input type="hidden" value="' + itm.width + '" name="width[]">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + itm.length + '</p>\
                   </td>\
                   <td>\
                     <p class="text-sm mb-0">' + itm.qty + '</p>\
-                    <input type="hidden" value="' + itm.qty + '" name="qty[]">\
                   </td>\
                   <td>\
                     <p class="text-sm mb-0">Roll</p>\
