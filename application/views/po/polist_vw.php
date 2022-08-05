@@ -35,7 +35,7 @@
                     <p class="text-sm mb-0"><?= $value['pr'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['supplier'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['pr'] ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['status'] ?></p>
