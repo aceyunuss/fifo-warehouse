@@ -20,7 +20,7 @@ class Outbound extends Core_Controller
     $this->db->where('status !=', "Selesai");
     $data['logs'] = $this->Outbound_mod->get()->result_array();
 
-    
+
     $this->db->where("status", "Selesai");
     $data['out'] = $this->Outbound_mod->get()->result_array();
 
@@ -84,20 +84,35 @@ class Outbound extends Core_Controller
 
     $out = $this->Outbound_mod->insert($inp);
 
-    foreach ($dat['stock_id'] as $key => $value) {
+    $this->load->model('Req_mod');
 
-      $gi = $this->Mst_mod->getStock($dat['stock_id'][$key])->row_array();
+    $this->db->where(['spb' => $dat['spb']]);
+    $this->db->select("request.spb, request_item.*");
+    $this->db->join("request", "request.id=request_item.req_id", "left");
+    $gi = $this->Req_mod->getItem()->row_array();
+    
+    $itm[0]['outbound_id']      = $out;
+    // $itm[0]['stock_id']     = $dat['stock_id'][$key];
+    $itm[0]['name']        = $gi['name'];
+    $itm[0]['description'] = $gi['description'];
+    $itm[0]['qty']         = $gi['qty'];
+    $itm[0]['length']      = $gi['length'];
+    $itm[0]['width']       = $gi['width'];
+    
+    // foreach ($dat['stock_id'] as $key => $value) {
 
-      $itm[$key]['outbound_id'] = $out;
-      $itm[$key]['stock_id']    = $dat['stock_id'][$key];
-      $itm[$key]['code']        = $gi['code'];
-      $itm[$key]['name']        = $gi['nm'];
-      $itm[$key]['description'] = $gi['dsc'];
-      $itm[$key]['qty']         = $dat['qty'][$key];
-      $itm[$key]['length']      = $dat['length'][$key];
-      $itm[$key]['width']       = $dat['width'][$key];
-      $itm[$key]['lot']         = substr($dat['lot'][$key], 0, -1);
-    }
+    //   $gi = $this->Mst_mod->getStock($dat['stock_id'][$key])->row_array();
+
+    //   $itm[$key]['outbound_id'] = $out;
+    //   $itm[$key]['stock_id']    = $dat['stock_id'][$key];
+    //   $itm[$key]['code']        = $gi['code'];
+    //   $itm[$key]['name']        = $gi['nm'];
+    //   $itm[$key]['description'] = $gi['dsc'];
+    //   $itm[$key]['qty']         = $dat['qty'][$key];
+    //   $itm[$key]['length']      = $dat['length'][$key];
+    //   $itm[$key]['width']       = $dat['width'][$key];
+    //   $itm[$key]['lot']         = substr($dat['lot'][$key], 0, -1);
+    // }
 
     $this->Outbound_mod->insertItem($itm);
 
@@ -133,15 +148,15 @@ class Outbound extends Core_Controller
   {
     $de['out'] = $this->Outbound_mod->get($id)->row_array();
     $de['itm'] = $this->Outbound_mod->getItem("", $id)->result_array();
-    foreach ($de['itm'] as $key => $value) {
-      $lot = [];
-      $l = explode(",", $value['lot']);
-      foreach ($l as $k => $v) {
-        $lot[] = $this->Mst_mod->getLot($v)->row()->lot;
-      }
+    // foreach ($de['itm'] as $key => $value) {
+    //   $lot = [];
+    //   $l = explode(",", $value['lot']);
+    //   foreach ($l as $k => $v) {
+    //     $lot[] = $this->Mst_mod->getLot($v)->row()->lot;
+    //   }
 
-      $de['itm'][$key]['lot'] = implode(", ", $lot);
-    }
+    //   $de['itm'][$key]['lot'] = implode(", ", $lot);
+    // }
     $this->template("outbound/outboundprc_vw", "Serah Terima Barang", $de);
   }
 
@@ -157,28 +172,30 @@ class Outbound extends Core_Controller
       $data['status_id'] = 22;
       $data['status'] = "Selesai";
 
-      $itm = $this->Outbound_mod->getItem("", $id)->result_array();
-      $arr = [];
+      $itm = $this->Outbound_mod->updateItem($id);
 
-      foreach ($itm as $key => $value) {
+      // $itm = $this->Outbound_mod->getItem("", $id)->result_array();
+      // $arr = [];
 
-        $arr = explode(",", $value['lot']);
-        $lq = $value['qty'];
+      // foreach ($itm as $key => $value) {
 
-        $this->db->order_by("lot_id", "asc");
-        $this->db->where_in('lot_id', $arr);
-        $lot = $this->Mst_mod->getLot()->result_array();
+      //   $arr = explode(",", $value['lot']);
+      //   $lq = $value['qty'];
 
-        foreach ($lot as $k => $v) {
-          $lq -= $v['qty'];
-          if ($lq >= 0) {
-            $min = 0;
-          } else {
-            $min = abs($lq);
-          }
-          $upd = $this->db->where('lot_id', $v['lot_id'])->update("item_lot", ['qty' => $min]);
-        }
-      }
+      //   $this->db->order_by("lot_id", "asc");
+      //   $this->db->where_in('lot_id', $arr);
+      //   $lot = $this->Mst_mod->getLot()->result_array();
+
+      //   foreach ($lot as $k => $v) {
+      //     $lq -= $v['qty'];
+      //     if ($lq >= 0) {
+      //       $min = 0;
+      //     } else {
+      //       $min = abs($lq);
+      //     }
+      //     $upd = $this->db->where('lot_id', $v['lot_id'])->update("item_lot", ['qty' => $min]);
+      //   }
+      // }
     }
 
     if (isset($data)) {
@@ -193,5 +210,19 @@ class Outbound extends Core_Controller
       $msg = "Gagal";
     }
     echo "<script>alert('$msg memproses data'); location.href='" . site_url() . "';</script>";
+  }
+
+
+  public function get_spbb()
+  {
+    $this->load->model("Req_mod");
+    $spb = $this->input->post('spb');
+    $this->db->where(['spb' => $spb, 'status_id' => 12]);
+
+    $this->db->select("request.spb, request_item.*");
+    $this->db->join("request", "request.id=request_item.req_id", "left");
+    $item = $this->Req_mod->getItem()->result_array();
+
+    echo json_encode($item);
   }
 }
