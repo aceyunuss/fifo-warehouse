@@ -31,13 +31,15 @@ class Item extends Core_Controller
 
   public function upd_inp()
   {
-    $it = $this->input->post('qty');
+    $post = $this->input->post();
 
     $this->db->trans_begin();
 
-    foreach ($it as $key => $value) {
-      $this->Item_mod->updateLot($key, ['qty' => $value]);
-    }
+    $upd['act'] = $post['act'];
+    $upd['note'] = $post['note'];
+    $upd['updated'] = date('Y-m-d H:i:s');
+
+    $this->Item_mod->updateItem($post['id'], $upd);
 
     if ($this->db->trans_status() !== FALSE) {
       $this->db->trans_commit();

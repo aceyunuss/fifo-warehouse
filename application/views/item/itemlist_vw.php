@@ -31,7 +31,7 @@
             <tbody>
               <?php foreach ($item as $key => $value) { ?>
                 <tr class="text-center">
-                  <form method="POST" action="<?= site_url('item/update') ?>">
+                  <form method="POST" action="<?= site_url('item/upd_inp') ?>">
                     <td>
                       <p class="text-sm mb-0"><?= $value['lot'] ?></p>
                     </td>
@@ -57,13 +57,13 @@
                       <p class="text-sm mb-0"><?= $value['qty'] ?></p>
                     </td>
                     <td>
-                      <p class="text-sm mb-0"><?= $value['act'] ?></p>
+                      <input type="number" min="0" class="form-control" name="act" value="<?= $value['act'] ?>">
                     </td>
                     <td>
                       <p class="text-sm mb-0"><?= "ROLL" ?></p>
                     </td>
                     <td>
-                      <a href="<?= site_url('item/update/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Simpan</a>
+                      <button type="submit" class="badge badge-sm bg-gradient-success">Simpan</button>
                     </td>
                     <td>
                       <p class="text-sm mb-0"><?= $value['updated'] ?></p>

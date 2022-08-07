@@ -38,6 +38,12 @@ class Item_mod extends CI_Model
   }
 
 
+  public function updateItem($id, $data)
+  {
+    return $this->db->where("id", $id)->update("item", $data);
+  }
+
+
   public function getItem($id = "")
   {
     $this->db->select("item.*, supp_name");
@@ -48,7 +54,7 @@ class Item_mod extends CI_Model
     return $this->db->get("item");
   }
 
-  
+
   public function updateLot($id, $data)
   {
     $this->db->where('lot_id', $id)->update("item_lot", $data);
