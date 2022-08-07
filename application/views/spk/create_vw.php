@@ -25,7 +25,7 @@
               <h6 class="mb-1 text-dark text-sm">SPK Date</h6>
             </label>
             <div class="col-sm-3">
-              <input type="date" class="form-control needed" name="spkdate" spkuired>
+              <input type="datetime-local" class="form-control neds" name="spkdate" spkuired>
             </div>
           </div>
 

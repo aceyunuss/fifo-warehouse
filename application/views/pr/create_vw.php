@@ -31,7 +31,7 @@
               <h6 class="mb-1 text-dark text-sm">PR Date</h6>
             </label>
             <div class="col-sm-3">
-              <input type="date" class="form-control needed" name="prdate" required>
+              <input type="datetime-local" class="form-control neds" name="prdate" required>
             </div>
             <label class="col-sm-2 col-form-label">
               <h6 class="mb-1 text-dark text-sm">Item Category</h6>
