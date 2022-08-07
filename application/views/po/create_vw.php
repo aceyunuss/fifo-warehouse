@@ -25,7 +25,7 @@
               <h6 class="mb-1 text-dark text-sm">PO Date</h6>
             </label>
             <div class="col-sm-3">
-              <input type="datetime-local" class="form-control" name="podate" required>
+              <input type="datetime-local" class="form-control neds" name="podate" required>
             </div>
           </div>
 

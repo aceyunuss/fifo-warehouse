@@ -227,7 +227,7 @@
       // });
 
 
-    
+
       var today = new Date();
       var dd = today.getDate();
       var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
@@ -240,6 +240,10 @@
       }
       today = yyyy + '-' + mm + '-' + dd;
       $('.needed').attr("min", today)
+      // 2022-08-20T20:20
+      todaycom = yyyy + '-' + mm + '-' + dd + 'T00:00';
+      $('.neds').attr("min", todaycom)
+
 
       na = '<div class="card-body pt-4 p-3">\
             <ul class="list-group">\
