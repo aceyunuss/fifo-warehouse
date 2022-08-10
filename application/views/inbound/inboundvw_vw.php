@@ -53,11 +53,23 @@
           </div>
           <div class="col-sm-2">
           </div>
-          <label class="col-sm-1 control-label">
+         
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 control-label">
             <h6 class="mb-1 text-dark text-sm">Note</h6>
           </label>
           <div class="col-sm-3">
             <p class="form-control-static"><?= $inb['note'] ?></p>
+          </div>
+          <div class="col-sm-2">
+          </div>
+          <label class="col-sm-1 control-label">
+            <h6 class="mb-1 text-dark text-sm">Foto</h6>
+          </label>
+          <div class="col-sm-3">
+            <p class="form-control-static"><?= empty($inb['pict']) ? "" : "<a target='_blank' href='" . site_url('auth/dwnld/inbound/' . $inb['pict']) . "'>" . $inb['pict'] . "</a>" ?></p>
           </div>
         </div>
         <br>

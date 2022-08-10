@@ -93,6 +93,7 @@ class Spk extends Core_Controller
         $inp['qty'] = $dat['needed'][$key];
         $inp['item_code'] = $itm['code'];
         $inp['supplier'] = $itm['supp_name'];
+        $inp['qty_req'] = $dat['req_inp'][$key];
       }
     }
 

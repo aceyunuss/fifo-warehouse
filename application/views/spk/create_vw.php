@@ -139,18 +139,20 @@
                         </td>
                         <td>
                           <p class="text-sm mb-0">` + cale[x].qty + `</p>
+                          <input type="hidden" class="qty" data-qty="` + cale[x].id + `" value="` + cale[x].qty + `">
                         </td>
                         <td>
                           <input type="checkbox" class="used" value="1" name="used[` + cale[x].id + `]">
                         </td>
                         <td>
-                          <input style="width: 50px;" type="number" min="0"name="needed[` + cale[x].id + `]">
+                          <input style="width: 70px;" class="form-control needed" data-needed="` + cale[x].id + `" type="number" min="0"name="needed[` + cale[x].id + `]">
                         </td>
                         <td>
                           <p class="text-sm mb-0">ROLL</p>
                         </td>
                         <td>
-                          <p class="text-sm mb-0">3</p>
+                          <p class="text-sm mb-0 reqs"  data-req="` + cale[x].id + `">-</p>
+                          <input type="hidden" class="req_inp" data-req_inp="` + cale[x].id + `"  name="req_inp[` + cale[x].id + `]">
                         </td>
                       </tr>`
           }
@@ -163,6 +165,19 @@
     })
 
   })
+
+  $(document).on('keyup', ".needed", function(e) {
+    $('.needed').each(function(i, obj) {
+      ids = $(this).data('needed');
+      ned = $(this).val();
+      qty = $('.qty[data-qty="' + ids + '"]').val()
+      req = qty - ned
+      if(req <= 5 && $(this).val() != ""){
+        $('.reqs[data-req="' + ids + '"]').text(5-req)
+        $('.req_inp[data-req_inp="' + ids + '"]').val(5-req)
+      }
+    });
+  });
 
   $(document).on('submit', "#submitform", function(e) {
 

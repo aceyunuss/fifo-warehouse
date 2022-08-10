@@ -29,10 +29,21 @@ class Inbound extends Core_Controller
 
   public function create()
   {
+    $this->load->model("Po_mod");
     $data['bpb'] = $this->Inbound_mod->getNum();
     $data['supp'] = $this->Mst_mod->getSupp()->result_array();
     $data['item'] = $this->Mst_mod->getItem()->result_array();
     $data['cat'] = $this->Mst_mod->getCat();
+
+    $spb = $this->Inbound_mod->get()->result_array();
+    if (!empty($spb)) {
+      $sl = array_column($spb, "po");
+      $this->db->where_not_in("po", $sl);
+    }
+    $this->db->where('status', 'Selesai');
+    $po = $this->Po_mod->get()->result_array();
+    $data['po'] = array_column($po, "po");
+
     $this->template("inbound/create_vw", "Bukti Penerimaan Barang", $data);
   }
 
@@ -49,10 +60,16 @@ class Inbound extends Core_Controller
       'do'      => $dat['do'],
       'bpb'     => $dat['bpb'],
       'bpb_date' => $dat['bpbdate'],
-      // 'note'    => $dat['note'],
+      'note'    => $dat['note'],
       'status_id' => 1,
       'status'  => "Menunggu Persetujuan"
     ];
+
+    if (!empty($_FILES['pict']['name'])) {
+      $this->session->set_userdata("dir_upload", "inbound");
+      $upload = $this->upld("pict");
+      $inp['pict'] = $upload;
+    }
 
     $in = $this->Inbound_mod->insert($inp);
     $this->load->model('Po_mod');
@@ -133,7 +150,7 @@ class Inbound extends Core_Controller
       // die;
       // $this->Inbound_mod->insertLot($id);
     }
-    
+
     if (isset($data)) {
       $this->Inbound_mod->update($id, $data);
     }

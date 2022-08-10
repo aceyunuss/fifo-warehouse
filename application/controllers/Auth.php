@@ -44,33 +44,39 @@ class Auth extends Core_Controller
       $this->db->where('status !=', "Selesai");
       $data['intodo'] = $this->Inbound_mod->get()->result_array();
 
+      $this->db->order_by("id", "desc");
       $this->db->where("status", "Selesai");
       $data['in'] = $this->Inbound_mod->get()->result_array();
 
+      $this->db->order_by("id", "desc");
       $this->db->where("status", "Selesai");
       $data['out'] = $this->Outbound_mod->get()->result_array();
 
       $this->db->where("status !=", "Selesai");
       $data['reqtodo'] = $this->Req_mod->get()->result_array();
 
+      $this->db->order_by("id", "desc");
       $this->db->where("status", "Selesai");
       $data['req'] = $this->Req_mod->get()->result_array();
 
       $this->db->where("status !=", "Selesai");
       $data['spktodo'] = $this->Spk_mod->get()->result_array();
 
+      $this->db->order_by("id", "desc");
       $this->db->where("status", "Selesai");
       $data['spk'] = $this->Spk_mod->get()->result_array();
 
       $this->db->where("status !=", "Selesai");
       $data['prtodo'] = $this->Pr_mod->get()->result_array();
 
+      $this->db->order_by("id", "desc");
       $this->db->where("status", "Selesai");
       $data['pr'] = $this->Pr_mod->get()->result_array();
 
       $this->db->where("status !=", "Selesai");
       $data['potodo'] = $this->Po_mod->get()->result_array();
 
+      $this->db->order_by("id", "desc");
       $this->db->where("status", "Selesai");
       $data['po'] = $this->Po_mod->get()->result_array();
 

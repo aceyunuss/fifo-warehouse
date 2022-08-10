@@ -34,10 +34,12 @@
               <h6 class="mb-1 text-dark text-sm">PR No</h6>
             </label>
             <div class="col-sm-3">
-              <input type="text" maxlength="255" id="pr" class="form-control" name="pr">
-            </div>
-            <div class="col-sm-2">
-              <a href="#" id="fnd" class="btn btn-outline-primary btn-sm mb-0 add">Cari</a>
+              <select class="form-control" name="pr" id="pr">
+                <option value="">--Pilih--</option>
+                <?php foreach ($pr as $v) { ?>
+                  <option value="<?= $v ?>"><?= $v ?></option>
+                <?php } ?>
+              </select>
             </div>
           </div>
 
@@ -99,8 +101,8 @@
     $('.prdate').attr("min", today)
 
 
-    $('#fnd').click(function() {
-      let pr = $("#pr").val()
+    $('#pr').change(function() {
+      let pr = $(this).val()
 
       if (pr == "") {
         alert("Nomor PR harap diisi")

@@ -27,10 +27,19 @@ class Po extends Core_Controller
 
   public function create()
   {
-    $this->load->model("Req_mod");
+    $this->load->model("Pr_mod");
     $data['po'] = $this->Po_mod->getNum();
     $data['cat'] = $this->Mst_mod->getCat();
 
+    $po = $this->Po_mod->get()->result_array();
+    if (!empty($po)) {
+      $sl = array_column($po, "pr");
+      $this->db->where_not_in("pr", $sl);
+    }
+    $this->db->where('status', 'Selesai');
+    $pr = $this->Pr_mod->get()->result_array();
+    $data['pr'] = array_column($pr, "pr");
+    
     $this->template("po/create_vw", "Pesanan Pembelian", $data);
   }
 
@@ -133,7 +142,7 @@ class Po extends Core_Controller
   {
     $this->load->model("Pr_mod");
     $pr = $this->input->post('pr');
-    $this->db->where(['pr' => $pr, 'status_id' => 72]);
+    $this->db->where(['pr' => $pr]);
 
     // $pr = $this->Pr_mod->get()->row_array();
     $this->db->select("pr.pr, pr_item.*");

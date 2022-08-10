@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="card-body">
-        <form role="form text-left" action="<?= site_url('inbound/new_inp') ?>" method="POST" id="submitform">
+        <form role="form text-left" action="<?= site_url('inbound/new_inp') ?>" method="POST" id="submitform" enctype='multipart/form-data'>
 
           <div class="form-group row">
             <label class="col-sm-2 control-label">
@@ -58,16 +58,38 @@
               <h6 class="mb-1 text-dark text-sm">PO No.</h6>
             </label>
             <div class="col-sm-3">
-              <input type="text" maxlength="255" class="form-control" id="po" name="po" required>
+              <select class="form-control" name="po" id="po">
+                <option value="">--Pilih--</option>
+                <?php foreach ($po as $v) { ?>
+                  <option value="<?= $v ?>"><?= $v ?></option>
+                <?php } ?>
+              </select>
             </div>
+
             <div class="col-sm-2">
-              <a href="#" id="fnd" class="btn btn-outline-primary btn-sm mb-0">Cari</a>
             </div>
             <label class="col-sm-1 control-label">
               <h6 class="mb-1 text-dark text-sm">PR No</h6>
             </label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" id="pr" name="pr" required>
+              <input type="text" class="form-control" id="pr" name="pr" required readonly>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 control-label">
+              <h6 class="mb-1 text-dark text-sm">Keterangan</h6>
+            </label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="note" required>
+            </div>
+            <div class="col-sm-1">
+            </div>
+            <label class="col-sm-1 control-label">
+              <h6 class="mb-1 text-dark text-sm">Foto</h6>
+            </label>
+            <div class="col-sm-3">
+              <input type="file" class="form-control" name="pict" required>
             </div>
           </div>
           <br>
@@ -180,9 +202,9 @@
     })
 
 
-    $('#fnd').click(function() {
+    $('#po').change(function() {
 
-      let po = $("#po").val()
+      let po = $(this).val()
       $.ajax({
         type: "POST",
         url: '<?= site_url('inbound/get_po') ?>',
