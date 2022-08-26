@@ -146,7 +146,8 @@ class Inbound extends Core_Controller
       $data['status_id'] = 3;
       $data['status'] = "Selesai";
 
-      $this->Inbound_mod->updateItem($id);
+      // $this->Inbound_mod->updateItem($id);
+      $this->Inbound_mod->generateCode($id);
       // die;
       // $this->Inbound_mod->insertLot($id);
     }

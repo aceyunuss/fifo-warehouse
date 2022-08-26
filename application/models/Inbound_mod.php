@@ -98,6 +98,50 @@ class Inbound_mod extends CI_Model
     }
   }
 
+
+  public function generateCode($id)
+  {
+    $itm = $this->getItem("", $id)->result_array();
+
+    $supp = $this->db->select("code, supp_name")->where("inbound.id", $id)->join("supplier", "supp_id=supplier.id", "left")->get("inbound")->row_array();
+
+    foreach ($itm as $key => $value) {
+      $av =  $this->db
+        ->select("id, code, lot, qty, act, cat")
+        ->where(['width' => $value['width'], 'length' => $value['length'], 'description' => $value['description']])
+        ->get("item")->row_array();
+
+      $n = $this->db->where("code !=", NULL)->get("item")->num_rows();
+      ++$n;
+      $ur = str_repeat(0, 3 - strlen($n)) . $n;
+
+      if (empty($av['code'])) {
+        $upd['code'] = $value['category'] . "-" . $supp['code'] . "-" . $ur;
+      }
+
+      switch ($av['cat']) {
+        case 'RML':
+          $f = "A";
+          break;
+        case 'RMP':
+          $f = "B";
+          break;
+        case 'DT':
+          $f = "C";
+          break;
+      }
+
+      $lid =  $f . date('Ymd');
+
+      $upd['lot'] = empty($av['lot']) ? $lid : $av['lot'] . ", " . $lid;
+      
+      $upd['qty'] = $av['act'] + $value['qty'];
+      $upd['act'] = $av['act'] + $value['qty'];
+
+      $this->db->where('id', $av['id'])->update("item", $upd);
+    }
+  }
+
   public function insertLot($id)
   {
     $itm = $this->getItem("", $id)->result_array();
