@@ -131,15 +131,15 @@ class Outbound extends Core_Controller
   {
     $de['out'] = $this->Outbound_mod->get($id)->row_array();
     $de['itm'] = $this->Outbound_mod->getItem("", $id)->result_array();
-    foreach ($de['itm'] as $key => $value) {
-      $lot = [];
-      $l = explode(",", $value['lot']);
-      foreach ($l as $k => $v) {
-        $lot[] = $this->Mst_mod->getLot($v)->row()->lot;
-      }
+    // foreach ($de['itm'] as $key => $value) {
+    //   $lot = [];
+    //   $l = explode(",", $value['lot']);
+    //   foreach ($l as $k => $v) {
+    //     $lot[] = $this->Mst_mod->getLot($v)->row()->lot;
+    //   }
 
-      $de['itm'][$key]['lot'] = implode(", ", $lot);
-    }
+    //   $de['itm'][$key]['lot'] = implode(", ", $lot);
+    // }
     $te = ($this->session->userdata('position') == "Admin Gudang") ? " Barang Keluar"  : " Terima Barang";
     $this->template("outbound/outboundvw_vw", $te, $de);
   }
