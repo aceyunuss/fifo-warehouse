@@ -45,7 +45,7 @@
                   <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">BPB No</th>
                   <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Supplier</th>
                   <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">BPB Date</th>
-                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Keterangan</th>
                   <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
                   <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                 </tr>
