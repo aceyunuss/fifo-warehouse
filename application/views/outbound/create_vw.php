@@ -59,9 +59,9 @@
             <table class="table align-items-center mb-0 item_table">
               <thead>
                 <tr>
-                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">No. Lot</th> -->
-                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">Waktu</th> -->
-                  <!-- <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Code</th> -->
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">No. Lot</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder">Waktu</th>
+                  <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Code</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Description</th>
                   <th rowspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Item Name</th>
                   <th colspan="2" class="text-uppercase text-center text-secondary text-xxs font-weight-bolder ">Size</th>
@@ -114,6 +114,17 @@
               itm = cale[x];
 
               tbody += '<tr class="text-center">\
+                  <td>\
+                    <p class="text-sm mb-0">' + itm.lot + '</p>\
+                    <input type="hidden" name="lot[]" value="' + itm.lot + '">\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + itm.lot_date + '</p>\
+                  </td>\
+                  <td>\
+                    <p class="text-sm mb-0">' + itm.item_code + '</p>\
+                    <input type="hidden" name="item_code[]" value="' + itm.item_code + '">\
+                  </td>\
                   <td>\
                     <p class="text-sm mb-0">' + itm.description + '</p>\
                   </td>\

@@ -90,7 +90,7 @@ class Outbound extends Core_Controller
     $this->db->select("request.spb, request_item.*");
     $this->db->join("request", "request.id=request_item.req_id", "left");
     $gi = $this->Req_mod->getItem()->row_array();
-    
+
     $itm[0]['outbound_id']      = $out;
     // $itm[0]['stock_id']     = $dat['stock_id'][$key];
     $itm[0]['name']        = $gi['name'];
@@ -98,7 +98,9 @@ class Outbound extends Core_Controller
     $itm[0]['qty']         = $gi['qty'];
     $itm[0]['length']      = $gi['length'];
     $itm[0]['width']       = $gi['width'];
-    
+    $itm[0]['lot']         = $dat['lot'][0];
+    $itm[0]['code']        = $dat['item_code'][0];
+
     // foreach ($dat['stock_id'] as $key => $value) {
 
     //   $gi = $this->Mst_mod->getStock($dat['stock_id'][$key])->row_array();
@@ -223,6 +225,33 @@ class Outbound extends Core_Controller
     $this->db->join("request", "request.id=request_item.req_id", "left");
     $item = $this->Req_mod->getItem()->result_array();
 
+    foreach ($item as $key => $value) {
+      $lot = $this->db
+        ->select("item.code, item_lot.*")
+        ->where(['description' => $value['description'], 'length' => $value['length'], 'width' => $value['width']])
+        ->join("item", "item.id=item_lot.stock_id")
+        ->get("item_lot")
+        ->result_array();
+      $ln = [];
+      $dt = [];
+      $tq = 0;
+      foreach ($lot as $k => $v) {
+
+        if ($value['qty'] >= $tq) {
+          $ln[] = $v['lot'];
+          $dt[] = $v['incoming'];
+        }
+
+        $tq = $tq + $v['qty'];
+      }
+
+      $strlot = !empty($ln) ? (implode(",", $ln)) : "";
+      $strdt = !empty($dt) ? (implode(",", $dt)) : "";
+
+      $item[$key]['item_code'] = $lot[0]['code'];
+      $item[$key]['lot'] = $strlot;
+      $item[$key]['lot_date'] = $strdt;
+    }
     echo json_encode($item);
   }
 }
