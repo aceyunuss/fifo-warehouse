@@ -134,11 +134,27 @@ class Inbound_mod extends CI_Model
       $lid =  $f . date('Ymd');
 
       $upd['lot'] = empty($av['lot']) ? $lid : $av['lot'] . ", " . $lid;
-      
+
       $upd['qty'] = $av['act'] + $value['qty'];
       $upd['act'] = $av['act'] + $value['qty'];
 
       $this->db->where('id', $av['id'])->update("item", $upd);
+
+      $loted = $this->loted($av['id'], $lid);
+
+      if (is_null($loted)) {
+
+        $lot = [
+          'stock_id'  => $av['id'],
+          'lot'       => $lid,
+          'qty'       => $value['qty'],
+          'incoming'  => $value['incoming']
+        ];
+        $this->db->insert("item_lot", $lot);
+      } else {
+        $upd['qty'] = $loted['qty'] + $value['qty'];
+        $this->db->where('lot_id', $loted['lot_id'])->update("item_lot", $upd);
+      }
     }
   }
 
