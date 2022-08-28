@@ -227,7 +227,7 @@ class Outbound extends Core_Controller
 
     foreach ($item as $key => $value) {
       $lot = $this->db
-        ->select("item.code, item_lot.*")
+        ->select("item.code, item.name, item_lot.*")
         ->where(['description' => $value['description'], 'length' => $value['length'], 'width' => $value['width']])
         ->join("item", "item.id=item_lot.stock_id")
         ->get("item_lot")
@@ -249,6 +249,7 @@ class Outbound extends Core_Controller
       $strdt = !empty($dt) ? (implode(",", $dt)) : "";
 
       $item[$key]['item_code'] = $lot[0]['code'];
+      $item[$key]['item_name'] = $lot[0]['name'];
       $item[$key]['lot'] = $strlot;
       $item[$key]['lot_date'] = $strdt;
     }
