@@ -56,7 +56,7 @@ class Req extends Core_Controller
       'spk'       => $dat['spk'],
       // 'category'  => $dat['cat'][0],
       'status_id' => 11,
-      'status'    => "Mengunggu Persetujuan"
+      'status'    => "Menunggu Persetujuan"
     ];
 
     $in = $this->Req_mod->insert($inp);
