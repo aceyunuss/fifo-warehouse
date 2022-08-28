@@ -18,7 +18,8 @@ class Auth extends Core_Controller
 
       $data['todo'] = $this->Mst_mod->getTodo()->result_array();
       $data['supp'] = $this->Mst_mod->getSupp()->num_rows();
-      $data['item'] = $this->Item_mod->getStock()->num_rows();
+      $this->db->select("sum(qty) as tot");
+      $data['item'] = $this->Item_mod->getItem()->row()->tot;
       $data['inb'] = $this->Inbound_mod->get()->num_rows();
       $data['outs'] = $this->Outbound_mod->get()->num_rows();
 
