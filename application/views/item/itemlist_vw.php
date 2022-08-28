@@ -8,6 +8,23 @@
           </div>
         </div>
       </div>
+
+      <div class="card-body">
+        <div class="form-group row">
+          <label class="col-sm-1 control-label">
+            <h6 class="mb-1 text-dark text-sm">Item</h6>
+          </label>
+          <div class="col-sm-3">
+            <select id="typ" class="form-control">
+              <option value="all" <?= $type == "all" ? "selected" : "" ?>>Semua</option>
+              <?php foreach ($cat as $key => $value) { ?>
+                <option value="<?= $value ?>" <?= $type == $value ? "selected" : "" ?>><?= $value ?></option>
+              <?php } ?>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
           <table id="list" class="table align-items-center mb-0">
@@ -120,5 +137,12 @@
         opacity: 1
       }, 300);
     });
+
+
+    $('#typ').change(function() {
+      let typ = $('select[id=typ] option').filter(':selected').val()
+      location.href = '<?= site_url('item/alias/') ?>' + typ
+    })
+
   });
 </script>

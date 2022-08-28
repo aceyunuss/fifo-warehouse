@@ -17,10 +17,23 @@ class Item extends Core_Controller
 
   public function index()
   {
+    $data['type'] = "all";
+    $data['cat'] = $this->Mst_mod->getCat();
     $data['item'] = $this->Item_mod->getItem()->result_array();
     $this->template("item/itemlist_vw", "Stok Barang", $data);
   }
 
+
+  public function alias($type)
+  {
+    $data['type'] = $type;
+    $data['cat'] = $this->Mst_mod->getCat();
+    if ($type != "all") {
+      $this->db->where('cat', $type);
+    }
+    $data['item'] = $this->Item_mod->getItem()->result_array();
+    $this->template("item/itemlist_vw", "Stok Barang", $data);
+  }
 
   public function update($id)
   {
