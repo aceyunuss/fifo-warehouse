@@ -33,7 +33,7 @@
               <h6 class="mb-1 text-dark text-sm">STB Date</h6>
             </label>
             <div class="col-sm-3">
-              <input type="datetime-local" class="form-control" name="stbdate" required>
+              <input type="datetime-local" class="form-control neds" name="stbdate" required>
             </div>
             <div class="col-sm-1">
             </div>
@@ -91,6 +91,21 @@
 
 <script>
   $(document).ready(function() {
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = mm + '/' + dd + '/' + yyyy;
+    console.log(today)
+    $('.stbdate').attr("min", today)
+
 
     $('#spb').change(function() {
 
