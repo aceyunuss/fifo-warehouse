@@ -43,7 +43,7 @@ class Item extends Core_Controller
 
     if ($this->db->trans_status() !== FALSE) {
       $this->db->trans_commit();
-      $msg = "Berhasi";
+      $msg = "Berhasil";
     } else {
       $this->db->trans_rollback();
       $msg = "Gagal";
