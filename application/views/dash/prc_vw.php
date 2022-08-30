@@ -270,5 +270,41 @@
         opacity: 1
       }, 300);
     });
+
+
+    
+    na = '<div class="card-body pt-4 p-3">\
+        <ul class="list-group">\
+          <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">\
+            <div class="d-flex flex-column">\
+              <div id="navpr"></div>\
+            </div>\
+          </li>\
+        </ul>\
+      </div>';
+
+    $('#prhist').after(na);
+    var rowsShown = 5;
+    var rowsTotal = $('#prhist tbody tr').length;
+    var numPages = rowsTotal / rowsShown;
+    for (i = 0; i < numPages; i++) {
+      var pageNum = i + 1;
+      $('#navpr').append('<a  class="btn bg-gradient-primary" href="#" rel="' + i + '">' + pageNum + '</a> ');
+    }
+    $('#prhist tbody tr').hide();
+    $('#prhist tbody tr').slice(0, rowsShown).show();
+    $('#navpr a:first').addClass('active');
+    $('#navpr a').bind('click', function() {
+
+      $('#navpr a').removeClass('active');
+      $(this).addClass('active');
+      var currPage = $(this).attr('rel');
+      var startItem = currPage * rowsShown;
+      var endItem = startItem + rowsShown;
+      $('#prhist tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+      css('display', 'table-row').animate({
+        opacity: 1
+      }, 300);
+    });
   });
 </script>

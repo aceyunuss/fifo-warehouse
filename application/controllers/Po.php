@@ -96,14 +96,14 @@ class Po extends Core_Controller
   {
     $de['po'] = $this->Po_mod->get($id)->row_array();
     $de['itm'] = $this->Po_mod->getItem("", $id)->result_array();
-    $this->template("po/povw_vw", "Penerimaan Barang", $de);
+    $this->template("po/povw_vw", "Pesanan Pembelian", $de);
   }
 
   public function process($id)
   {
     $de['po'] = $this->Po_mod->get($id)->row_array();
     $de['itm'] = $this->Po_mod->getItem("", $id)->result_array();
-    $this->template("po/poprc_vw", "Penerimaan Barang", $de);
+    $this->template("po/poprc_vw", "Pesanan Pembelian", $de);
   }
 
 

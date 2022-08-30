@@ -24,6 +24,7 @@ class Auth extends Core_Controller
       $data['outs'] = $this->Outbound_mod->get()->num_rows();
       $data['spktot'] = $this->Spk_mod->get()->num_rows();
       $data['prtot'] = $this->Pr_mod->get()->num_rows();
+      $data['potot'] = $this->Po_mod->get()->num_rows();
 
 
       $pos = $this->session->userdata('position');
