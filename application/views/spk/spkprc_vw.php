@@ -77,10 +77,10 @@
                     <p class="text-sm mb-0"><?= $spk['item_name'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $spk['length'] ?></p>
+                    <p class="text-sm mb-0"><?= $spk['width'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $spk['width'] ?></p>
+                    <p class="text-sm mb-0"><?= $spk['length'] ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $spk['qty'] ?></p>
