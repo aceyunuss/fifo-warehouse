@@ -96,7 +96,7 @@ if ($this->session->userdata('position') == "Admin Gudang") { ?>
               <div class="numbers">
                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Surat Perintah Kerja</p>
                 <h5 class="font-weight-bolder mb-0">
-                  <?= $supp ?>
+                  <?= $spktot ?>
                 </h5>
               </div>
             </div>
@@ -117,7 +117,7 @@ if ($this->session->userdata('position') == "Admin Gudang") { ?>
               <div class="numbers">
                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Permintaan Pembelian</p>
                 <h5 class="font-weight-bolder mb-0">
-                  <?= $item ?>
+                  <?= $prtot ?>
                 </h5>
               </div>
             </div>
