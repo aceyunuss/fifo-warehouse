@@ -143,7 +143,7 @@
                           <p class="text-sm mb-0">` + cale[x].description + `</p>
                         </td>
                         <td>
-                          <p class="text-sm mb-0">` + cale[x].name + `</p>
+                          <p class="text-sm mb-0">` + cale[x].item_name + `</p>
                         </td>
                         <td>
                           <p class="text-sm mb-0">` + cale[x].width + `</p>
