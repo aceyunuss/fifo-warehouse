@@ -77,10 +77,10 @@
                     <p class="text-sm mb-0"><?= $value['name'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['length'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['width'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['width'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['length'] ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['qty'] ?></p>
