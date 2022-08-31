@@ -61,24 +61,24 @@
               <tr>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB No</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB Date</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($intodo as $key => $value) { ?>
+              <?php foreach ($outtodo as $key => $value) { ?>
                 <tr class="text-center">
                   <td>
-                    <p class="text-sm mb-0"><?= $value['bpb'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['stb'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['bpb_date'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['stb_date'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['note'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['status'] ?></p>
                   </td>
                   <td>
-                    <a href="<?= site_url('inbound/process/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Proses</a>
+                    <a href="<?= site_url('outbound/process/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Proses</a>
                   </td>
                 </tr>
               <?php } ?>
@@ -158,24 +158,24 @@
               <tr>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB No</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB Date</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($in as $key => $value) { ?>
+              <?php foreach ($out as $key => $value) { ?>
                 <tr class="text-center">
                   <td>
-                    <p class="text-sm mb-0"><?= $value['bpb'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['stb'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['bpb_date'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['stb_date'] ?></p>
                   </td>
                   <td>
                     <p class="text-sm mb-0"><?= $value['status'] ?></p>
                   </td>
                   <td>
-                    <a href="<?= site_url('inbound/view/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Lihat</a>
+                    <a href="<?= site_url('outbound/view/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Lihat</a>
                   </td>
                 </tr>
               <?php } ?>

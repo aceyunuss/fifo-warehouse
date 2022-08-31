@@ -53,6 +53,9 @@ class Auth extends Core_Controller
       $this->db->where("status", "Selesai");
       $data['in'] = $this->Inbound_mod->get()->result_array();
 
+      $this->db->where("status !=", "Selesai");
+      $data['outtodo'] = $this->Outbound_mod->get()->result_array();
+
       $this->db->order_by("id", "desc");
       $this->db->where("status", "Selesai");
       $data['out'] = $this->Outbound_mod->get()->result_array();
