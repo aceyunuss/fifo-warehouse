@@ -56,12 +56,12 @@
       </div>
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
-          <table id="todo_bpb" class="table align-items-center mb-0">
+          <table id="todo_stb" class="table align-items-center mb-0">
             <thead>
               <tr>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB No</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB Date</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPB No</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
             </thead>
@@ -75,7 +75,7 @@
                     <p class="text-sm mb-0"><?= $value['stb_date'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['status'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['spb'] ?></p>
                   </td>
                   <td>
                     <a href="<?= site_url('outbound/process/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Proses</a>
@@ -158,7 +158,7 @@
               <tr>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB No</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB Date</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPB No</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
             </thead>
@@ -172,7 +172,7 @@
                     <p class="text-sm mb-0"><?= $value['stb_date'] ?></p>
                   </td>
                   <td>
-                    <p class="text-sm mb-0"><?= $value['status'] ?></p>
+                    <p class="text-sm mb-0"><?= $value['spb'] ?></p>
                   </td>
                   <td>
                     <a href="<?= site_url('outbound/view/' . $value['id']) ?>" class="badge badge-sm bg-gradient-success">Lihat</a>
@@ -192,34 +192,68 @@
   $(document).ready(function() {
 
     na = '<div class="card-body pt-4 p-3">\
+    <ul class="list-group">\
+      <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">\
+        <div class="d-flex flex-column">\
+          <div id="navtspk"></div>\
+        </div>\
+      </li>\
+    </ul>\
+  </div>';
+
+    $('#todo_spk').after(na);
+    var rowsShown = 5;
+    var rowsTotal = $('#todo_spk tbody tr').length;
+    var numPages = rowsTotal / rowsShown;
+    for (i = 0; i < numPages; i++) {
+      var pageNum = i + 1;
+      $('#navtspk').append('<a  class="btn bg-gradient-primary" href="#" rel="' + i + '">' + pageNum + '</a> ');
+    }
+    $('#todo_spk tbody tr').hide();
+    $('#todo_spk tbody tr').slice(0, rowsShown).show();
+    $('#navtspk a:first').addClass('active');
+    $('#navtspk a').bind('click', function() {
+
+      $('#navtspk a').removeClass('active');
+      $(this).addClass('active');
+      var currPage = $(this).attr('rel');
+      var startItem = currPage * rowsShown;
+      var endItem = startItem + rowsShown;
+      $('#todo_spk tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+      css('display', 'table-row').animate({
+        opacity: 1
+      }, 300);
+    });
+
+    na = '<div class="card-body pt-4 p-3">\
         <ul class="list-group">\
           <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">\
             <div class="d-flex flex-column">\
-              <div id="navtodo"></div>\
+              <div id="navtstb"></div>\
             </div>\
           </li>\
         </ul>\
       </div>';
 
-    $('#todo').after(na);
+    $('#todo_stb').after(na);
     var rowsShown = 5;
-    var rowsTotal = $('#todo tbody tr').length;
+    var rowsTotal = $('#todo_stb tbody tr').length;
     var numPages = rowsTotal / rowsShown;
     for (i = 0; i < numPages; i++) {
       var pageNum = i + 1;
-      $('#navtodo').append('<a  class="btn bg-gradient-primary" href="#" rel="' + i + '">' + pageNum + '</a> ');
+      $('#navtstb').append('<a  class="btn bg-gradient-primary" href="#" rel="' + i + '">' + pageNum + '</a> ');
     }
-    $('#todo tbody tr').hide();
-    $('#todo tbody tr').slice(0, rowsShown).show();
-    $('#navtodo a:first').addClass('active');
-    $('#navtodo a').bind('click', function() {
+    $('#todo_stb tbody tr').hide();
+    $('#todo_stb tbody tr').slice(0, rowsShown).show();
+    $('#navtstb a:first').addClass('active');
+    $('#navtstb a').bind('click', function() {
 
-      $('#navtodo a').removeClass('active');
+      $('#navtstb a').removeClass('active');
       $(this).addClass('active');
       var currPage = $(this).attr('rel');
       var startItem = currPage * rowsShown;
       var endItem = startItem + rowsShown;
-      $('#todo tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+      $('#todo_stb tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
       css('display', 'table-row').animate({
         opacity: 1
       }, 300);
@@ -264,7 +298,7 @@
       }, 300);
     });
 
-    
+
     ne = '<div class="card-body pt-4 p-3">\
         <ul class="list-group">\
           <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">\
@@ -299,7 +333,7 @@
       }, 300);
     });
 
-    
+
     nx = '<div class="card-body pt-4 p-3">\
         <ul class="list-group">\
           <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">\
