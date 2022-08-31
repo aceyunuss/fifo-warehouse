@@ -59,8 +59,8 @@
           <table id="todo_bpb" class="table align-items-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPK No</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPK Date</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB No</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB Date</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
@@ -156,8 +156,8 @@
           <table id="stbhist" class="table align-items-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPK No</th>
-                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">SPK Date</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB No</th>
+                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">STB Date</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
